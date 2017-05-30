@@ -29,77 +29,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        android:id="@+id/textView" />
 
-    <Button
-        android:id="@+id/buttonPlans"
+    <FrameLayout
+        android:id="@+id/fragmentHolder"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="112dp"
-        android:background="@drawable/main_menu_item_background"
-        android:text="@string/meet_ou_plans"
-        android:textAppearance="@style/FontQuickSand"
-        android:textColor="@color/plain_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.323"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonContact"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/main_menu_item_background"
-        android:text="@string/contact_us"
-        android:textAppearance="@style/FontQuickSand"
-        android:textColor="@color/plain_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPlans" />
-
-    <Button
-        android:id="@+id/buttonJoin"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/main_menu_item_background"
-        android:text="@string/sign_up"
-        android:textAppearance="@style/FontQuickSand"
-        android:textColor="@color/plain_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.251"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContact" />
-
-    <Button
-        android:id="@+id/buttonEmergencySchedule"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/main_menu_item_background"
-        android:text="@string/emergency_sheducling"
-        android:textAppearance="@style/FontQuickSand"
-        android:textColor="@color/plain_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.269"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonJoin" />
+        android:layout_height="379dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="52dp" />
 
     <Button
         android:id="@+id/buttonSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@android:color/transparent"
