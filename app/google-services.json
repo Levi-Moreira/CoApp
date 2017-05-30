@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "824701590345",
+    "firebase_url": "https://coapp-82041.firebaseio.com",
+    "project_id": "coapp-82041",
+    "storage_bucket": "coapp-82041.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824701590345:android:a5ba6022a874b747",
+        "android_client_info": {
+          "package_name": "br.edu.ifce.lds.coapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824701590345-aq7o96a80187uo68h7kh61hkllgl7qc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ifce.lds.coapp",
+            "certificate_hash": "9e4f329cdac6739071eae6412c2f3eceb6a9d042"
+          }
+        },
+        {
+          "client_id": "824701590345-9sj9hhinirtejs5jv90jf67fdadkasqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRFGqHe4tNtftltd4ll3vYH5Qhh9Gdj3A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824701590345-9sj9hhinirtejs5jv90jf67fdadkasqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
