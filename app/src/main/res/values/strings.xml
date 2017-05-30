@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">CoApp</string>
     <string name="title_activity_landing">LandingActivity</string>
+    <string name="crash_toast_text">Ocorreu um erro e o app precisou ser fechado.</string>
+    <string name="meet_ou_plans">Conheça nossos planos</string>
+    <string name="contact_us">Fale Conosco</string>
+    <string name="sign_up">Faça seu cadastro</string>
+    <string name="emergency_sheducling">Agenda Emergencial</string>
+    <string name="sign_in">Entrar</string>
 </resources>
