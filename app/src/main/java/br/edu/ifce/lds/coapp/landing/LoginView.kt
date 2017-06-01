@@ -3,7 +3,14 @@ package br.edu.ifce.lds.coapp.landing
 import com.gral.android.actsports.common.BaseView
 
 /**
- * Created by ellca on 01/06/2017.
+ * Interface that holds the view methods
  */
 interface LoginView : BaseView {
+
+    fun showAuthenticationFailed()
+
+    fun showLoading()
+
+    fun showAuthenticationSucceed()
+
 }

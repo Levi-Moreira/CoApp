@@ -3,10 +3,10 @@ package br.edu.ifce.lds.coapp.landing
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import br.edu.ifce.lds.coapp.application.UserSession
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
-import com.gral.android.actsports.application.UserSession
 
 /**
  * Lower level communication class responsible for dealing with the database (Firebase)
@@ -20,6 +20,9 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
 
     val TAG = "LoginDataHandler"
 
+    /**
+     * Starts up the peferences, firebase auth for authentication
+     */
     init {
         mPrefs = PreferencesUtil(context)
 
@@ -38,6 +41,7 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
         }
     }
 
+
     fun turnOnAuthenticationListener() {
         mAuth.addAuthStateListener(mAuthListener)
     }
@@ -46,6 +50,9 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
         mAuth.removeAuthStateListener(mAuthListener)
     }
 
+    /**
+     * Logs user using an email and a password
+     */
     fun authenticateWithPassword(username: String, password: String) {
         mAuth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener(context as Activity) { task ->
@@ -69,6 +76,10 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
                 }
     }
 
+
+    /**
+     * Logs an user using facebook credential
+     */
     fun authenticateWithFacebook(credential: AuthCredential?) {
         if (credential != null) {
             mAuth.signInWithCredential(credential)

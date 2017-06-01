@@ -6,6 +6,4 @@ package com.gral.android.actsports.common
 
 interface BasePresenter<T : BaseView> {
 
-    fun attachView(view: T)
-
 }

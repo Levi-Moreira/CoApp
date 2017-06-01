@@ -1,26 +1,64 @@
 package br.edu.ifce.lds.coapp.landing
 
+import android.content.Context
+import com.google.firebase.auth.AuthCredential
 import com.gral.android.actsports.common.BasePresenter
 
 /**
- * Created by ellca on 01/06/2017.
+ * Presenter responsible for interepresenting requests from the login fragment
  */
 
-class LoginPresenter : BasePresenter<LoginView> {
-
-    lateinit var mView: LoginView
+class LoginPresenter(val mView: LoginView, val context: Context) : BasePresenter<LoginView> {
 
 
-    override fun attachView(view: LoginView) {
-        mView = view;
+    val mDataHandler: LoginDataHandler = LoginDataHandler(this, context)
+
+
+    /**
+     * Activates authentication when fragment starts
+     */
+    fun onActivityStart() {
+        mDataHandler.turnOnAuthenticationListener()
+
     }
 
+    /**
+     * Disables authentication listener when fragment ends
+     */
+    fun onActivityStop() {
+        mDataHandler.turnOffOnAuthenticationListener()
+    }
+
+
+    /**
+     * Authenticates an user using email and password
+     */
+    fun authenticateWithPassword(username: String, password: String) {
+
+        mView.showLoading()
+        mDataHandler.authenticateWithPassword(username, password)
+
+    }
+
+    /**
+     * Shows error message if something goes wrong
+     */
     fun authenticationFailed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mView.showAuthenticationFailed()
     }
 
+    /**
+     * Shows successful message if everything goes well
+     */
     fun authenticationSuceeded() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mView.showAuthenticationSucceed()
+    }
+
+    /**
+     * Use facebook credentials to authenticate a user
+     */
+    fun  authenticateWithFacebookCredentials(credential: AuthCredential?) {
+        mDataHandler.authenticateWithFacebook(credential)
     }
 
 
