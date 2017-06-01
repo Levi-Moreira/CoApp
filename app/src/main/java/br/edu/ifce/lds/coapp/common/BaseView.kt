@@ -8,5 +8,5 @@ import android.content.Context
 
 interface BaseView {
 
-    val context: Context
+    val mContext: Context
 }

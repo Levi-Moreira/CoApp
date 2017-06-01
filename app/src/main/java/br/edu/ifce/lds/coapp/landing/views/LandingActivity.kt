@@ -9,7 +9,6 @@ import org.jetbrains.anko.onClick
 class LandingActivity : br.edu.ifce.lds.coapp.common.BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
 
 
-
     var landingFragment = LandingFragment()
     var loginFragment = LoginFragment()
 
@@ -50,6 +49,10 @@ class LandingActivity : br.edu.ifce.lds.coapp.common.BaseActivity(), LoginFragme
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
+    }
+
+    override fun finishActivity() {
+        finish()
     }
 
 }

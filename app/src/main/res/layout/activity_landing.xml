@@ -40,5 +40,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentHolder"
         app:layout_constraintVertical_bias="1.0" />
+
+    <FrameLayout
+        android:id="@+id/progressWheel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#99000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_loader"
+            android:indeterminate="true"
+            android:padding="25dp" />
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
 

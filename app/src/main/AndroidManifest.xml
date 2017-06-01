@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="br.edu.ifce.lds.coapp.landing.views.LandingActivity"
+            android:name=".landing.views.LandingActivity"
             android:label="@string/title_activity_landing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".intro.SplashActivity">
@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".common.BaseActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainMenuActivity"></activity>
     </application>
 
 </manifest>
