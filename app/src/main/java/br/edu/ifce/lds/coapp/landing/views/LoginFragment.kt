@@ -1,14 +1,6 @@
-package br.edu.ifce.lds.coapp.landing
+package br.edu.ifce.lds.coapp.landing.views
 
-
-import android.content.Context
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import br.edu.ifce.lds.coapp.R
+import br.edu.ifce.lds.coapp.R.layout.fragment_login
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.jetbrains.anko.onClick
 
@@ -16,18 +8,18 @@ import org.jetbrains.anko.onClick
 /**
  * Login fragment to be loaded in the main landing screen
  */
-class LoginFragment : Fragment() {
+class LoginFragment : android.support.v4.app.Fragment() {
 
 
     lateinit var mCallback: ILoginFragmentCallbacks
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: android.view.LayoutInflater?, container: android.view.ViewGroup?,
+                              savedInstanceState: android.os.Bundle?): android.view.View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_login, container, false)
+        return inflater!!.inflate(fragment_login, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: android.view.View?, savedInstanceState: android.os.Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         backButton.onClick {
@@ -39,7 +31,7 @@ class LoginFragment : Fragment() {
         fun onClickBackButton()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: android.content.Context?) {
         super.onAttach(context)
         try {
             mCallback = context as ILoginFragmentCallbacks

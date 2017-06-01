@@ -1,4 +1,4 @@
-package br.edu.ifce.lds.coapp.landing
+package br.edu.ifce.lds.coapp.landing.entities
 
 import java.util.prefs.Preferences
 

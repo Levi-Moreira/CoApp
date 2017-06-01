@@ -1,16 +1,12 @@
-package br.edu.ifce.lds.coapp.landing
+package br.edu.ifce.lds.coapp.landing.views
 
-
-import android.os.Bundle
-import android.support.v4.app.FragmentTransaction
-import android.view.View
-import android.widget.Toast
-import br.edu.ifce.lds.coapp.R
-import br.edu.ifce.lds.coapp.common.BaseActivity
+import br.edu.ifce.lds.coapp.R.anim.*
+import br.edu.ifce.lds.coapp.R.layout.activity_landing
 import kotlinx.android.synthetic.main.activity_landing.*
 import org.jetbrains.anko.onClick
 
-class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
+
+class LandingActivity : br.edu.ifce.lds.coapp.common.BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
 
 
 
@@ -18,11 +14,11 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
     var loginFragment = LoginFragment()
 
 
-    lateinit var fragmentTransaction: FragmentTransaction
+    lateinit var fragmentTransaction: android.support.v4.app.FragmentTransaction
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_landing)
+        setContentView(activity_landing)
 
 
         landingFragment.arguments = intent.extras
@@ -36,9 +32,10 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
 
         buttonSignIn.onClick {
             fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.setCustomAnimations(R.anim.fragment_slide_right_enter, R.anim.fragment_slide_left_exit)
+            fragmentTransaction.setCustomAnimations(fragment_slide_right_enter, fragment_slide_left_exit)
             fragmentTransaction.replace(fragmentHolder.id, loginFragment)
-            buttonSignIn.visibility = View.GONE
+
+            buttonSignIn.visibility = android.view.View.GONE
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -46,9 +43,10 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
 
     override fun onClickBackButton() {
         fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_right_exit)
+        fragmentTransaction.setCustomAnimations(fragment_slide_left_enter, fragment_slide_right_exit)
         fragmentTransaction.replace(fragmentHolder.id, landingFragment)
-        buttonSignIn.visibility = View.VISIBLE
+
+        buttonSignIn.visibility = android.view.View.VISIBLE
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 

@@ -1,7 +1,7 @@
 package br.edu.ifce.lds.coapp.application
 
 
-import br.edu.ifce.lds.coapp.landing.User
+import br.edu.ifce.lds.coapp.landing.entities.User
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 
 

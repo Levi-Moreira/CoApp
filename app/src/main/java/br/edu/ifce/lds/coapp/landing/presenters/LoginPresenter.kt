@@ -1,6 +1,8 @@
-package br.edu.ifce.lds.coapp.landing
+package br.edu.ifce.lds.coapp.landing.presenters
 
 import android.content.Context
+import br.edu.ifce.lds.coapp.landing.dhandlers.LoginDataHandler
+import br.edu.ifce.lds.coapp.landing.views.LoginView
 import com.google.firebase.auth.AuthCredential
 import com.gral.android.actsports.common.BasePresenter
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.edu.ifce.lds.coapp.landing.LandingActivity">
+    tools:context="br.edu.ifce.lds.coapp.landing.views.LandingActivity">
 
     <ImageView
         android:id="@+id/imageView"

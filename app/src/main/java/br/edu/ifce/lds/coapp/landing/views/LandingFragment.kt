@@ -1,7 +1,8 @@
-package br.edu.ifce.lds.coapp.landing
+package br.edu.ifce.lds.coapp.landing.views
 
 
 import android.support.v4.app.Fragment
+import br.edu.ifce.lds.coapp.R.layout.fragment_landing
 import kotlinx.android.synthetic.main.fragment_landing.*
 import org.jetbrains.anko.onClick
 
@@ -19,7 +20,7 @@ class LandingFragment : android.support.v4.app.Fragment() {
 
 
 
-        return inflater!!.inflate(br.edu.ifce.lds.coapp.R.layout.fragment_landing, container, false)
+        return inflater!!.inflate(fragment_landing, container, false)
     }
 
     override fun onViewCreated(view: android.view.View?, savedInstanceState: android.os.Bundle?) {

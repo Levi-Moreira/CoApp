@@ -1,9 +1,11 @@
-package br.edu.ifce.lds.coapp.landing
+package br.edu.ifce.lds.coapp.landing.dhandlers
 
 import android.app.Activity
 import android.content.Context
 import android.util.Log
 import br.edu.ifce.lds.coapp.application.UserSession
+import br.edu.ifce.lds.coapp.landing.entities.User
+import br.edu.ifce.lds.coapp.landing.presenters.LoginPresenter
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
