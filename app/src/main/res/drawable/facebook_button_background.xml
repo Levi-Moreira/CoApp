@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
+    <item android:state_pressed="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/menu_back_item_color_pressed" />
+            <solid android:color="#3b5998" />
             <corners android:radius="10dp" />
         </shape>
     </item>
-    <item android:state_pressed="false">
+    <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/menu_back_item_color_not_pressed" />
+            <solid android:color="#597dc6" />
             <corners android:radius="10dp" />
         </shape>
     </item>

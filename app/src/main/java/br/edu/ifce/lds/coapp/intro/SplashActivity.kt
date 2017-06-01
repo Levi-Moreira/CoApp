@@ -2,7 +2,7 @@ package br.edu.ifce.lds.coapp.intro
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import landing.LandingActivity
+import br.edu.ifce.lds.coapp.landing.LandingActivity
 import br.edu.ifce.lds.coapp.R
 import org.jetbrains.anko.startActivity
 

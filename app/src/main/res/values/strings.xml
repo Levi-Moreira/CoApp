@@ -8,5 +8,12 @@
     <string name="emergency_sheducling">Agenda Emergencial</string>
     <string name="sign_in">Entrar</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="go_back">Voltar</string>
+    <string name="password">Senha</string>
+    <string name="email">Email</string>
+    <string name="facebook_sign_in">Entrar com Facebook</string>
+
 
 </resources>

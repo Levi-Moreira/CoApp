@@ -1,4 +1,4 @@
-package landing
+package br.edu.ifce.lds.coapp.landing
 
 
 import android.support.v4.app.Fragment

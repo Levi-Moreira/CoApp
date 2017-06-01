@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.edu.ifce.lds.coapp.LoginActivity">
+    tools:context="br.edu.ifce.lds.coapp.landing.LoginActivity">
 
 </android.support.constraint.ConstraintLayout>

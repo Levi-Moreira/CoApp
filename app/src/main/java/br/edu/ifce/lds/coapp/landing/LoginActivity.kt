@@ -1,7 +1,4 @@
-package landing
-
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+package br.edu.ifce.lds.coapp.landing
 
 class LoginActivity : android.support.v7.app.AppCompatActivity() {
 
