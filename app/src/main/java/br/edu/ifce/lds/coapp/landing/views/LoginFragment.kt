@@ -16,7 +16,7 @@ import org.jetbrains.anko.support.v4.startActivity
  */
 class LoginFragment() : Fragment(), LoginView {
 
-    override val mContext: Context = this.context
+
 
     lateinit var mCallback: ILoginFragmentCallbacks
 

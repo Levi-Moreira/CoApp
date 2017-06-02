@@ -1,4 +1,4 @@
-package com.gral.android.actsports.common
+package br.edu.ifce.lds.coapp.common
 
 import android.content.Context
 
@@ -8,5 +8,4 @@ import android.content.Context
 
 interface BaseView {
 
-    val mContext: Context
 }

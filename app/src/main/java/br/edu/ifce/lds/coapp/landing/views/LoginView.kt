@@ -1,6 +1,6 @@
 package br.edu.ifce.lds.coapp.landing.views
 
-import com.gral.android.actsports.common.BaseView
+import br.edu.ifce.lds.coapp.common.BaseView
 
 /**
  * Interface that holds the view methods

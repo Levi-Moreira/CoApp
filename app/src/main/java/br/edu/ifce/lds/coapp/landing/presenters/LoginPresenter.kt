@@ -4,7 +4,7 @@ import android.content.Context
 import br.edu.ifce.lds.coapp.landing.dhandlers.LoginDataHandler
 import br.edu.ifce.lds.coapp.landing.views.LoginView
 import com.google.firebase.auth.AuthCredential
-import com.gral.android.actsports.common.BasePresenter
+import br.edu.ifce.lds.coapp.common.BasePresenter
 
 /**
  * Presenter responsible for interepresenting requests from the login fragment
