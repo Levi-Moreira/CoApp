@@ -13,4 +13,6 @@ interface LoginView : BaseView {
 
     fun showAuthenticationSucceed()
 
+    fun hideLoading()
+
 }

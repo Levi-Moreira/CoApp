@@ -50,8 +50,8 @@
         android:visibility="gone">
 
         <ProgressBar
-            android:layout_width="144dp"
-            android:layout_height="144dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:background="@drawable/background_loader"
             android:indeterminate="true"

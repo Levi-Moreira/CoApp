@@ -46,6 +46,7 @@ class LoginPresenter(val mView: LoginView, val context: Context) : BasePresenter
      * Shows error message if something goes wrong
      */
     fun authenticationFailed() {
+        mView.hideLoading()
         mView.showAuthenticationFailed()
     }
 
