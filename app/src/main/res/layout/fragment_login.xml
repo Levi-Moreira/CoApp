@@ -1,5 +1,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -76,7 +77,7 @@
     <Button
         android:id="@+id/signIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="64dp"
@@ -89,20 +90,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
-    <Button
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/facebookSignIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="20dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/facebook_button_background"
+        android:drawableLeft="@null"
+        android:drawableRight="@null"
         android:text="@string/facebook_sign_in"
         android:textAppearance="@style/FontQuickSand"
         android:textColor="@color/plain_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIn" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn"
+        facebook:login_text="@string/facebook_sign_in" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
