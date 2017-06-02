@@ -26,10 +26,13 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
      * Starts up the peferences, firebase auth for authentication
      */
     init {
+        //shared prefenreces for saving user information
         mPrefs = PreferencesUtil(context)
 
+        //firebase auth for authentication
         mAuth = FirebaseAuth.getInstance()
 
+        //athentication listener for keeping track when the user logs in and off
         mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             if (user != null) {
@@ -44,10 +47,17 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
     }
 
 
+    /**
+     * Self explanatory
+     */
     fun turnOnAuthenticationListener() {
         mAuth.addAuthStateListener(mAuthListener)
     }
 
+
+    /**
+     * Self explanatory
+     */
     fun turnOffOnAuthenticationListener() {
         mAuth.removeAuthStateListener(mAuthListener)
     }
@@ -60,17 +70,22 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
                 .addOnCompleteListener(context as Activity) { task ->
 
                     if (!task.isSuccessful) {
+                        //if log in failed, ask presente to show error message
                         Log.w(TAG, "signInWithEmail:failed", task.exception)
                         mPresenter.authenticationFailed()
                     } else {
+
+                        //if log in was sucessful
                         val user = mAuth.currentUser
 
+                        //saves user info to shared preferences
                         if (user != null) {
                             val userF = User("", username, user.uid)
 
                             val session = UserSession(mPrefs)
                             session.signin(userF)
 
+                            //tells the vuew that it was sucessful
                             mPresenter.authenticationSuceeded()
 
                         }
@@ -80,7 +95,7 @@ class LoginDataHandler(val mPresenter: LoginPresenter, val context: Context) {
 
 
     /**
-     * Logs an user using facebook credential
+     * Logs an user using facebook credential, same idea as previously
      */
     fun authenticateWithFacebook(credential: AuthCredential?) {
         if (credential != null) {

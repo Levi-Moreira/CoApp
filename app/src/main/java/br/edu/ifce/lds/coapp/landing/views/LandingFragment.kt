@@ -12,26 +12,27 @@ import org.jetbrains.anko.onClick
 
 
 /**
- * A simple [Fragment] subclass.
+ * Shows the first fragment with the initial menu
  */
 class LandingFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
-
-
 
         return inflater!!.inflate(fragment_landing, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //after the views were inflated, set up views reactions
         setUpViews()
     }
 
+    /**
+     * Some view reactions and button clicks
+     */
    fun setUpViews(){
         buttonPlans.onClick {
             android.widget.Toast.makeText(this.context, br.edu.ifce.lds.coapp.R.string.meet_ou_plans, android.widget.Toast.LENGTH_SHORT).show()

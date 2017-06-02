@@ -39,30 +39,48 @@ class LoginFragment() : Fragment(), LoginView {
     //manages the facebook callback
     lateinit var mCallbackManager: CallbackManager
 
+    //easier acess for the context
+    lateinit var mContext: Context
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        //start up facebook sdk before creating views
         FacebookSdk.sdkInitialize(this.activity.applicationContext)
+
+        //capture context for later use
+        mContext = this.context
+
+        //start up callback for facebook login
         mCallbackManager = CallbackManager.Factory.create()
 
+        //inflate view and return
         return inflater!!.inflate(fragment_login, container, false)
     }
 
     override fun onViewCreated(view: android.view.View?, savedInstanceState: android.os.Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //start up the presenter
         mPresenter = LoginPresenter(this, this.context)
 
+        //configure facebook login button
         setUpFacebook()
 
+        //configure other buttons and views
         backButton.onClick {
+            //ask activity to switch fragments
             mCallback.onClickBackButton()
         }
 
         signIn.onClick {
+            //verifies if fields are correctly filled
             if (edtEmail.isValidEmail && edtPassword.isValid) {
+                //if so send info to Firebase
                 mPresenter.authenticateWithPassword(edtEmail.text.toString(), edtPassword.text.toString())
             } else {
+
+                //if not identify who`s not correctly filled and warn user
                 if (!edtEmail.isValidEmail) {
                     edtEmail.error = "Preeencha o seu email."
                     edtEmail.invalidate()
@@ -76,9 +94,15 @@ class LoginFragment() : Fragment(), LoginView {
         }
     }
 
+    /**
+     * Sets up facebook login button configuration
+     */
     private fun setUpFacebook() {
 
+        //tell what to bring from the login
         facebookSignIn.setReadPermissions("email", "public_profile")
+
+        //register the callback results
         facebookSignIn.registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
 
@@ -93,10 +117,16 @@ class LoginFragment() : Fragment(), LoginView {
 
             override fun onError(error: FacebookException) {
                 facebookSignIn.text = getString(R.string.facebook_sign_in)
+                Toast.makeText(mContext, R.string.connection_failed,
+                        Toast.LENGTH_SHORT).show()
             }
         })
     }
 
+    /**
+     * Send credentials to presenter for registering in firebase
+     * @param token the acess token provided by Facebook
+     */
     fun handleFacebookAccessToken(token: AccessToken) {
         val credential = FacebookAuthProvider.getCredential(token.token)
         mPresenter.authenticateWithFacebookCredentials(credential)
@@ -108,6 +138,7 @@ class LoginFragment() : Fragment(), LoginView {
     override fun onAttach(context: android.content.Context?) {
         super.onAttach(context)
         try {
+            //attache the callback for acessing activity
             mCallback = context as ILoginFragmentCallbacks
 
         } catch (e: ClassCastException) {
@@ -116,15 +147,21 @@ class LoginFragment() : Fragment(), LoginView {
     }
 
 
+    /**
+     * When facebook activity returns this function should be called from the activity
+     */
     fun onActivtyReturned(requestCode: Int, resultCode: Int, data: Intent?){
         mCallbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
-    //in case an authentication problem happened
+    /**
+     * In case an authentication problem happened
+     */
     override fun showAuthenticationFailed() {
         Toast.makeText(this.context, R.string.auth_failed,
                 Toast.LENGTH_SHORT).show()
     }
+
 
 
     override fun showLoading() {
@@ -139,15 +176,6 @@ class LoginFragment() : Fragment(), LoginView {
         mCallback.finishActivity()
     }
 
-    interface ILoginFragmentCallbacks {
-        fun onClickBackButton()
-
-        fun finishActivity()
-
-        fun showLoading()
-
-        fun hideLoading()
-    }
 
     override fun onStart() {
         super.onStart()
@@ -157,6 +185,19 @@ class LoginFragment() : Fragment(), LoginView {
     override fun onStop() {
         super.onStop()
         mPresenter.onActivityStop()
+    }
+
+    /**
+     * Intefaces with the login fragment and the landing activity
+     */
+    interface ILoginFragmentCallbacks {
+        fun onClickBackButton()
+
+        fun finishActivity()
+
+        fun showLoading()
+
+        fun hideLoading()
     }
 
 

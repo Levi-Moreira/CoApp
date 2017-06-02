@@ -3,7 +3,8 @@ package br.edu.ifce.lds.coapp.utils
 import android.widget.EditText
 
 /**
- * Created by ellca on 01/06/2017.
+ * Helper and extension functions for better development
+ * Developed by: ellcash_levi
  */
 
 val EditText.isValid: Boolean

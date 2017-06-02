@@ -16,6 +16,7 @@
     <string name="facebook_sign_in">Entrar com Facebook</string>
     <string name="login_sucessful">Entrando...</string>
     <string name="auth_failed">Email ou senha inválidos</string>
+    <string name="connection_failed">Ocorreu um erro de conexão.</string>
 
     <string name="facebook_app_id">225128488001850</string>
     <string name="fb_login_protocol_scheme">fb225128488001850</string>

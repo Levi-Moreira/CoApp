@@ -18,13 +18,18 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 
 
+/**
+ * Holds the landing page and login page fragments
+ */
 class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
 
 
+    //start up the gragments
     var landingFragment = LandingFragment()
     var loginFragment = LoginFragment()
 
 
+    //helps with changing between fragments
     lateinit var fragmentTransaction: FragmentTransaction
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
@@ -32,13 +37,18 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
         setContentView(activity_landing)
 
 
+        //show the first fragment
         landingFragment.arguments = intent.extras
         supportFragmentManager.beginTransaction()
                 .add(fragmentHolder.id, landingFragment).commit()
 
+        //configure some views
         setUpViews()
     }
 
+    /**
+     * Sets up some button clicks and views configurations
+     */
     fun setUpViews() {
 
         buttonSignIn.onClick {
@@ -52,17 +62,27 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
         }
     }
 
+    /**
+     * When one clicks in the back button from the login fragment
+     */
     override fun onClickBackButton() {
+        //change the fragment to the landing one
         fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(fragment_slide_left_enter, fragment_slide_right_exit)
         fragmentTransaction.replace(fragmentHolder.id, landingFragment)
 
+        //restoes the sign in button
         buttonSignIn.visibility = VISIBLE
         fragmentTransaction.addToBackStack(null)
+
+        //effectively change fragments
         fragmentTransaction.commit()
 
     }
 
+    /**
+     * starts up the main menu activity
+     */
     override fun finishActivity() {
         Toast.makeText(this, R.string.login_sucessful, Toast.LENGTH_SHORT).show()
         startActivity<MainMenuActivity>()
@@ -77,6 +97,9 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
         progressWheel.visibility = VISIBLE
     }
 
+    /**
+     * When an intent for outside was made, the result will come to this method
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         loginFragment.onActivtyReturned(requestCode, resultCode, data)
