@@ -4,8 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Slide
 import br.edu.ifce.lds.coapp.R
+import br.edu.ifce.lds.coapp.common.BaseActivity
 
-class ContactActivity : AppCompatActivity() {
+class ContactActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
