@@ -1,14 +1,18 @@
 package br.edu.ifce.lds.coapp.landing.views
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.edu.ifce.lds.coapp.R.layout.fragment_landing
+import br.edu.ifce.lds.coapp.contact.ContactActivity
 import kotlinx.android.synthetic.main.fragment_landing.*
 import org.jetbrains.anko.onClick
+import org.jetbrains.anko.support.v4.startActivity
+import android.transition.Slide
 
 
 /**
@@ -16,6 +20,8 @@ import org.jetbrains.anko.onClick
  */
 class LandingFragment : Fragment() {
 
+
+    lateinit var mLandingCallbacks: ILandingCallbacks
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,7 +39,8 @@ class LandingFragment : Fragment() {
     /**
      * Some view reactions and button clicks
      */
-   fun setUpViews(){
+    fun setUpViews() {
+
         buttonPlans.onClick {
             android.widget.Toast.makeText(this.context, br.edu.ifce.lds.coapp.R.string.meet_ou_plans, android.widget.Toast.LENGTH_SHORT).show()
         }
@@ -43,12 +50,28 @@ class LandingFragment : Fragment() {
         }
 
         buttonContact.onClick {
-            android.widget.Toast.makeText(this.context, br.edu.ifce.lds.coapp.R.string.contact_us, android.widget.Toast.LENGTH_SHORT).show()
+            mLandingCallbacks.startContactActivity()
         }
 
         buttonJoin.onClick {
             android.widget.Toast.makeText(this.context, br.edu.ifce.lds.coapp.R.string.sign_up, android.widget.Toast.LENGTH_SHORT).show()
         }
+    }
+
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        try {
+            mLandingCallbacks = context as ILandingCallbacks
+
+        } catch (e: ClassCastException) {
+            e.printStackTrace()
+        }
+    }
+
+    interface ILandingCallbacks {
+        fun startContactActivity()
     }
 
 }// Required empty public constructor

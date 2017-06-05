@@ -20,7 +20,8 @@
 
     <string name="facebook_app_id">225128488001850</string>
     <string name="fb_login_protocol_scheme">fb225128488001850</string>
-
+    <string name="phone">Telefone</string>
+    <string name="visit_web">Visitar o site</string>
 
 
 </resources>

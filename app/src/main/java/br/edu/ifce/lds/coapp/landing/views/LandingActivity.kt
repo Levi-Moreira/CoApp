@@ -2,6 +2,7 @@ package br.edu.ifce.lds.coapp.landing.views
 
 import android.content.Intent
 import android.support.v4.app.FragmentTransaction
+import android.transition.Slide
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -11,6 +12,7 @@ import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.R.anim.*
 import br.edu.ifce.lds.coapp.R.layout.activity_landing
 import br.edu.ifce.lds.coapp.common.BaseActivity
+import br.edu.ifce.lds.coapp.contact.ContactActivity
 import com.facebook.CallbackManager
 import kotlinx.android.synthetic.main.activity_landing.*
 import org.jetbrains.anko.onClick
@@ -21,7 +23,7 @@ import org.jetbrains.anko.support.v4.startActivity
 /**
  * Holds the landing page and login page fragments
  */
-class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
+class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks, LandingFragment.ILandingCallbacks {
 
 
     //start up the gragments
@@ -103,6 +105,15 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         loginFragment.onActivtyReturned(requestCode, resultCode, data)
+    }
+
+    /**
+     * When the landing fragment asks for a the contact activtiy to be started
+     */
+    override fun startContactActivity() {
+        startActivity<ContactActivity>()
+
+        overridePendingTransition(R.anim.fragment_slide_right_enter, fragment_slide_left_exit)
     }
 
 }
