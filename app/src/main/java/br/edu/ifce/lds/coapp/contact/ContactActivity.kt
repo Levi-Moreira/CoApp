@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.transition.Slide
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.common.BaseActivity
+import kotlinx.android.synthetic.main.activity_contact.*
 
 class ContactActivity : BaseActivity() {
 
@@ -12,6 +13,7 @@ class ContactActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
 
+        rbtEmail.isChecked = true
         setUpViews()
     }
 
