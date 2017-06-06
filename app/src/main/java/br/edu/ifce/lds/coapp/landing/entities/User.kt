@@ -1,7 +1,5 @@
 package br.edu.ifce.lds.coapp.landing.entities
 
-import java.util.prefs.Preferences
-
 /**
  * Models a user
  */

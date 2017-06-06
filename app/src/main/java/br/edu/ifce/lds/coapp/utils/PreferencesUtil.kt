@@ -44,15 +44,20 @@ class PreferencesUtil
         prefs.edit().putString(key, value).commit()
     }
 
+    fun getTokenFormatted(): String {
+        return "Bearer " + prefs.getString(TOKEN, "")
+    }
+
 
     companion object {
 
-        private val PFX = "Acts"
+        private val PFX = "CoApp"
         val LOGGED = PFX + ".logged"
         val UID = PFX + ".uid"
         val USERNAME = PFX + ".username"
         val PASSWORD = PFX + ".password"
         val EMAIL = PFX + ".email"
+        val TOKEN = PFX + ".token"
 
     }
 
