@@ -4,7 +4,7 @@ package br.edu.ifce.lds.coapp.contact.entities
  * Created by ellca on 06/06/2017.
  */
 enum class ContactType {
-    EMAIL, PHONE
+    email, phone
 }
 
-data class ContactInfo(var type: ContactType, var name: String, var info: String)
+data class ContactInfo(var type: String, var name: String, var info: String)

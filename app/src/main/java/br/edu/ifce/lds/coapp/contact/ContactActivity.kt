@@ -18,6 +18,7 @@ import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import br.edu.ifce.lds.coapp.utils.listWithNames
 import kotlinx.android.synthetic.main.activity_contact.*
 import android.widget.*
+import br.edu.ifce.lds.coapp.contact.entities.ContactType
 import org.jetbrains.anko.textColor
 
 
@@ -55,7 +56,7 @@ class ContactActivity : BaseActivity(), ContactView {
 
         mContactInfo = contactsInfo
 
-        contactNames.addAll(contactsInfo.listWithNames())
+        contactNames.addAll(contactsInfo.filter { it.type == ContactType.email.name }.listWithNames())
 
         // val adapter = ArrayAdapter<String>(this, R.layout.item_spinner, contactNames)
         val adapter = SpinnerCustomAdapter(this, contactNames, R.layout.item_spinner, R.layout.spinner_dropdown_item)
@@ -79,39 +80,5 @@ class ContactActivity : BaseActivity(), ContactView {
         progressWheel.visibility = GONE
     }
 
-    open class SpinnerCustomAdapter(val context: Context, val titles: MutableList<String>, val itemResouce: Int, val dropDownResource: Int) : BaseAdapter(), SpinnerAdapter {
 
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val v = LayoutInflater.from(context).inflate(itemResouce, parent, false)
-            val textView = v.findViewById(R.id.tv_item_spinner) as TextView
-            textView.text = titles[position]
-
-            if (position == 0) {
-                textView.textColor = Color.parseColor("#55ffffff");
-            }
-
-            return v
-        }
-
-        override fun getItem(position: Int): Any = titles[position]
-
-        override fun getItemId(position: Int): Long = position.toLong()
-
-        override fun getCount(): Int = titles.size
-
-        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val v = LayoutInflater.from(context).inflate(dropDownResource, parent, false)
-
-            val textView = v.findViewById(R.id.tv_dropdown) as CheckedTextView
-            textView.text = titles[position]
-
-            if (position == 0) {
-                textView.setTypeface(null, BOLD)
-            }
-
-            return v
-        }
-
-    }
 }
