@@ -23,6 +23,7 @@
     <string name="phone">Telefone</string>
     <string name="visit_web">Visitar o site</string>
     <string name="contact_means">Fale conosco</string>
+    <string name="selected_destination">Selecione o destinatário</string>
 
 
 </resources>

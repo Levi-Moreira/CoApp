@@ -7,4 +7,4 @@ import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
  */
 
 
-data class GetContactsInfoResponse(val contacts_info: List<ContactInfo>)
+data class GetContactsInfoResponse(var contact_info: List<ContactInfo>)

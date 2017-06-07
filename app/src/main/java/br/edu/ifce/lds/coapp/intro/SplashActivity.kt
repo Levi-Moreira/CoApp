@@ -1,17 +1,24 @@
 package br.edu.ifce.lds.coapp.intro
 
 import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Base64
 import android.util.Log
-import br.edu.ifce.lds.coapp.landing.views.LandingActivity
 import br.edu.ifce.lds.coapp.R
+import br.edu.ifce.lds.coapp.application.UserSession
+import br.edu.ifce.lds.coapp.landing.views.LandingActivity
+import br.edu.ifce.lds.coapp.utils.PreferencesUtil
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivity
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
+
 class SplashActivity : AppCompatActivity() {
+
+
+    private val mAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +29,7 @@ class SplashActivity : AppCompatActivity() {
         super.onResume()
 
         discoveryKeyHarsh()
+        signInFirebaseAnonimous()
         startActivity<LandingActivity>()
     }
 
@@ -44,5 +52,27 @@ class SplashActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    fun signInFirebaseAnonimous() {
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, { task ->
+                    if (task.isSuccessful) {
+                        val user = mAuth.currentUser?.getToken(true)
+                                ?.addOnCompleteListener({
+                                    task ->
+                                    if (task.isSuccessful) {
+                                        val session = UserSession(PreferencesUtil(this))
+                                        session.setToken(task.result.token!!)
+                                        Log.d("SIGNINTOKEN", task.result.token!!)
+                                    }
+
+                                })
+
+
+                    }else{
+                        Log.d("SIGNINTOKEN", task.result.toString())
+                    }
+                })
     }
 }

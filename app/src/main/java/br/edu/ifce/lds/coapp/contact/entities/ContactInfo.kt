@@ -7,4 +7,4 @@ enum class ContactType {
     EMAIL, PHONE
 }
 
-data class ContactInfo(val type: ContactType, val name: String, val info: String)
+data class ContactInfo(var type: ContactType, var name: String, var info: String)

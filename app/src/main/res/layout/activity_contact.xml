@@ -72,67 +72,78 @@
 
         </RadioGroup>
 
-        <Spinner
-            android:id="@+id/spinner"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/emailContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupContactMean" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupContactMean">
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edit_text_background"
-            android:hint="Digite seu email"
-            android:padding="10dp"
-            android:textAppearance="@style/FontQuickSand"
-            android:textColor="@color/plain_white"
-            android:textColorHint="#55ffffff"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-        <EditText
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edit_text_background"
-            android:gravity="left"
-            android:hint="Digite sua mensagem"
-            android:inputType="textMultiLine"
-            android:padding="10dp"
-            android:textAppearance="@style/FontQuickSand"
-            android:textColor="@color/plain_white"
-            android:textColorHint="#55ffffff"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.18"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/login_edit_text_background"
+                android:gravity="center_vertical"
+                android:popupBackground="#fff"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/login_edit_text_background"
+                android:hint="Digite seu email"
+                android:padding="10dp"
+                android:textAppearance="@style/FontQuickSand"
+                android:textColor="@color/plain_white"
+                android:textColorHint="#55ffffff"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/login_edit_text_background"
+                android:gravity="left"
+                android:hint="Digite sua mensagem"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textAppearance="@style/FontQuickSand"
+                android:textColor="@color/plain_white"
+                android:textColorHint="#55ffffff"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message" />
+        </android.support.constraint.ConstraintLayout>
 
         <Button
             android:id="@+id/buttonSend"
@@ -151,7 +162,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/emailContact" />
+
+        <FrameLayout
+            android:id="@+id/progressWheel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="#99000000"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_loader"
+                android:indeterminate="true"
+                android:padding="25dp" />
+        </FrameLayout>
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

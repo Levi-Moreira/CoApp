@@ -23,8 +23,18 @@
         <!-- Custom Attr-->
         <item name="fontPath">font/DroidSans.ttf</item>
     </style>
+
     <style name="FontQuickSand" parent="android:TextAppearance">
         <!-- Custom Attr-->
         <item name="fontPath">font/Quicksand-Regular.ttf</item>
+    </style>
+
+    <style name="spinnerItemStyle" parent="android:Widget.TextView">
+        <item name="android:textAppearance">@style/FontQuickSand</item>
+        <item name="android:textColor">@color/plain_white</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
     </style>
 </resources>

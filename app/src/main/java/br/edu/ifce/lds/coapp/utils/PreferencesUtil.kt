@@ -45,7 +45,7 @@ class PreferencesUtil
     }
 
     fun getTokenFormatted(): String {
-        return "Bearer " + prefs.getString(TOKEN, "")
+        return prefs.getString(TOKEN, "")
     }
 
 

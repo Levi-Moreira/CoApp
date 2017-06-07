@@ -1,11 +1,11 @@
 package br.edu.ifce.lds.coapp.firebase
 
-import retrofit2.Response
+import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
-import rx.Observable
-import java.util.*
+import retrofit2.http.Query
+
 
 /**
  * Created by ellca on 06/06/2017.
@@ -14,9 +14,9 @@ import java.util.*
 open interface FirebaseAPi {
 
 
-    @GET("/api/v1/occupations")
+    @GET("/.json")
     fun getContactsInfo(
-            @Header("Authorization") auth_token: String
+            @Query("auth") auth_token: String
     ): Observable<GetContactsInfoResponse>
 
 }

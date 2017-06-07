@@ -1,6 +1,0 @@
-COMMAND=PREDEX_LIBRARY_TO_DEX_ARCHIVE
-FILE_PATH=/home/levi/projs-lds/CoApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar
-FILE_HASH=7e06f0eec1d6d1de7909408bf68e4f108af1d3b8
-DX_VERSION=1.13
-JUMBO_MODE=true
-OPTIMIZE=true

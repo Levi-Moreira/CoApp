@@ -33,4 +33,8 @@ class UserSession(private val mPrefs: PreferencesUtil) {
         mPrefs.clearData()
 
     }
+
+    fun setToken(token: String) {
+        mPrefs.setString(PreferencesUtil.TOKEN, token)
+    }
 }
