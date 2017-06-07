@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Typeface.BOLD
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,8 @@ import br.edu.ifce.lds.coapp.utils.listWithNames
 import kotlinx.android.synthetic.main.activity_contact.*
 import android.widget.*
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
+import org.jetbrains.anko.find
+import org.jetbrains.anko.onCheckedChange
 import org.jetbrains.anko.textColor
 
 
@@ -27,6 +30,9 @@ class ContactActivity : BaseActivity(), ContactView {
     lateinit var mPresenter: ContactPresenter
 
     lateinit var mContactInfo: List<ContactInfo>
+
+    var mContactPhones: MutableList<ContactInfo> = mutableListOf()
+    var mContactPhoneAdapter = PhoneContactAdapter(mContactPhones)
     var contactNames = mutableListOf<String>()
 
 
@@ -39,6 +45,8 @@ class ContactActivity : BaseActivity(), ContactView {
         mPresenter = ContactPresenter(mView = this, prefs = PreferencesUtil(this))
         mPresenter.getContactInfo()
 
+
+
         setUpViews()
     }
 
@@ -46,6 +54,21 @@ class ContactActivity : BaseActivity(), ContactView {
 
         contactNames.add("Selecione o destinatário")
 
+
+        radioGroupContactMean.onCheckedChange({ radioGroup, i ->
+
+            val selectedIndex = radioGroup?.indexOfChild(radioGroup?.find(i))
+
+            if (selectedIndex == 0) {
+                emailContact.visibility = VISIBLE
+                phoneContact.visibility = GONE
+                buttonSend.text = getString(R.string.send)
+            } else {
+                emailContact.visibility = GONE
+                phoneContact.visibility = VISIBLE
+                buttonSend.text = getString(R.string.call)
+            }
+        })
 
         val slide = Slide()
         slide.duration = 1000
@@ -57,14 +80,16 @@ class ContactActivity : BaseActivity(), ContactView {
         mContactInfo = contactsInfo
 
         contactNames.addAll(contactsInfo.filter { it.type == ContactType.email.name }.listWithNames())
+        mContactPhones.addAll(contactsInfo.filter { it.type == ContactType.phone.name })
 
         // val adapter = ArrayAdapter<String>(this, R.layout.item_spinner, contactNames)
         val adapter = SpinnerCustomAdapter(this, contactNames, R.layout.item_spinner, R.layout.spinner_dropdown_item)
-        //adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
 
         spinner.adapter = adapter
 
-        Toast.makeText(this, "Brought stuff", Toast.LENGTH_SHORT).show()
+        phoneList.adapter = mContactPhoneAdapter
+        val mLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        phoneList.layoutManager = mLayoutManager
 
     }
 
