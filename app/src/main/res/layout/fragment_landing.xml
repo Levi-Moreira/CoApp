@@ -23,7 +23,7 @@
     <Button
         android:id="@+id/buttonPlans"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="48dp"
@@ -39,7 +39,7 @@
     <Button
         android:id="@+id/buttonContact"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
@@ -55,7 +55,7 @@
     <Button
         android:id="@+id/buttonJoin"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
@@ -71,7 +71,7 @@
     <Button
         android:id="@+id/buttonEmergencySchedule"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
