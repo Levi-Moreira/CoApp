@@ -13,6 +13,7 @@ import android.widget.Toast
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.R.layout.activity_contact
 import br.edu.ifce.lds.coapp.common.BaseActivity
+import br.edu.ifce.lds.coapp.contact.adapters.AttachmentFilesAdapter
 import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
 import br.edu.ifce.lds.coapp.contact.adapters.SpinnerCustomAdapter
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
@@ -51,6 +52,11 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
     //the adapter for the phone list
     lateinit var mContactPhoneAdapter: PhoneContactAdapter
 
+    var mFilesList = mutableListOf<Uri>()
+
+
+    val mFilesAdapter = AttachmentFilesAdapter(mFilesList)
+
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +82,13 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
      */
     private fun setUpViews() {
 
+
         mContactNames.add("Selecione o destinatário")
 
+        mFilesList.add(Uri.parse("android.resource://br.edu.ifce.lds.coapp/" + R.drawable.ic_add_file))
+
+        filesList.adapter = mFilesAdapter
+        filesList.layoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, false)
 
         //when changed the radio button selected, change the options shown
         radioGroupContactMean.onCheckedChange({ radioGroup, i ->
@@ -191,18 +202,30 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
     }
 
+    /**
+     * If an error occurs during loading
+     */
     override fun onError(message: String?) {
-        Toast.makeText(this, "Error", android.widget.Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Show loading progress wheel
+     */
     override fun showLoading() {
         progressWheel.visibility = VISIBLE
     }
 
+    /**
+     * Hide loading progress wheel
+     */
     override fun hideLoading() {
         progressWheel.visibility = GONE
     }
 
+    /**
+     * When user clicks on one of the phone numbers
+     */
     override fun onClickPhone(pos: Int) {
 
         mContactPhoneAdapter.selectedPos = pos
@@ -210,6 +233,10 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         buttonSend.enabled = true
     }
 
+
+    /**
+     * Animations for enter and exit activity
+     */
     private fun setUpAnimations() {
         val slide = Slide()
         slide.duration = 1000

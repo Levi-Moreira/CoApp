@@ -1,6 +1,5 @@
 package br.edu.ifce.lds.coapp.contact.adapters
 
-import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,6 @@ import br.edu.ifce.lds.coapp.R.id.tvName
 import br.edu.ifce.lds.coapp.R.id.tvPhoneNumber
 import br.edu.ifce.lds.coapp.R.layout.item_phone_contact
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
-import kotlinx.android.synthetic.main.item_phone_contact.tvName
-import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.find
 
@@ -25,8 +22,8 @@ class PhoneContactAdapter(val mContactList: MutableList<ContactInfo>, val mCallb
 
     var selectedPos = -1
 
-    override fun onCreateViewHolder(p0: ViewGroup?, p1: Int): PhoneContactViewHolder {
-        val v = LayoutInflater.from(p0?.context).inflate(item_phone_contact, p0, false)
+    override fun onCreateViewHolder(parent: ViewGroup?, p1: Int): PhoneContactViewHolder {
+        val v = LayoutInflater.from(parent?.context).inflate(item_phone_contact, parent, false)
 
         return PhoneContactViewHolder(v)
     }
