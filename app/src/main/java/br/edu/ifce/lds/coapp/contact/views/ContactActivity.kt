@@ -1,12 +1,15 @@
 package br.edu.ifce.lds.coapp.contact.views
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.transition.Slide
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
+import android.widget.LinearLayout
+import android.widget.Toast
 import br.edu.ifce.lds.coapp.R
-import br.edu.ifce.lds.coapp.utils.PreferencesUtil
-import android.widget.*
 import br.edu.ifce.lds.coapp.R.layout.activity_contact
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
@@ -14,13 +17,23 @@ import br.edu.ifce.lds.coapp.contact.adapters.SpinnerCustomAdapter
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
+import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import br.edu.ifce.lds.coapp.utils.listWithNames
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_contact.*
+import org.jetbrains.anko.enabled
 import org.jetbrains.anko.find
 import org.jetbrains.anko.onCheckedChange
+import org.jetbrains.anko.onClick
 
 
-class ContactActivity : BaseActivity(), ContactView {
+class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback {
+
 
     lateinit var mPresenter: ContactPresenter
 
@@ -28,10 +41,10 @@ class ContactActivity : BaseActivity(), ContactView {
 
     var mContactPhones = mutableListOf<ContactInfo>()
     var mContactNames = mutableListOf<String>()
-    var mKeys : MutableList<String> = mutableListOf()
+    var mKeys: MutableList<String> = mutableListOf()
 
 
-    var mContactPhoneAdapter = PhoneContactAdapter(mContactPhones)
+    lateinit var mContactPhoneAdapter: PhoneContactAdapter
 
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
@@ -40,6 +53,7 @@ class ContactActivity : BaseActivity(), ContactView {
 
         rbtEmail.isChecked = true
 
+        mContactPhoneAdapter = PhoneContactAdapter(mContactPhones, this)
         mPresenter = ContactPresenter(mView = this, prefs = PreferencesUtil(this))
         mPresenter.getContactInfo()
 
@@ -59,14 +73,38 @@ class ContactActivity : BaseActivity(), ContactView {
 
             if (selectedIndex == 0) {
                 emailContact.visibility = VISIBLE
-                phoneContact.visibility = GONE
+                phoneContact.visibility = INVISIBLE
                 buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.send)
             } else {
-                emailContact.visibility = GONE
+                emailContact.visibility = INVISIBLE
                 phoneContact.visibility = VISIBLE
                 buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.call)
             }
         })
+
+        buttonSend.onClick {
+            if (rbtPhone.isChecked) {
+                val number = mContactPhoneAdapter.getSelectedPhone()
+                val callIntent = Intent(Intent.ACTION_CALL)
+                callIntent.data = Uri.parse("tel:" + number)
+
+                Dexter.withActivity(this)
+                        .withPermission(android.Manifest.permission.CALL_PHONE)
+                        .withListener(object : PermissionListener {
+                            @SuppressLint("MissingPermission")
+                            override fun onPermissionGranted(response: PermissionGrantedResponse) {/* ... */
+                                startActivity(callIntent)
+                            }
+
+                            override fun onPermissionDenied(response: PermissionDeniedResponse) {/* ... */
+                            }
+
+                            override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {/* ... */
+                            }
+                        }).check()
+
+            }
+        }
 
         val slide = Slide()
         slide.duration = 1000
@@ -87,7 +125,7 @@ class ContactActivity : BaseActivity(), ContactView {
         spinner.adapter = adapter
 
         phoneList.adapter = mContactPhoneAdapter
-        val mLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val mLayoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         phoneList.layoutManager = mLayoutManager
 
     }
@@ -102,6 +140,13 @@ class ContactActivity : BaseActivity(), ContactView {
 
     override fun hideLoading() {
         progressWheel.visibility = GONE
+    }
+
+    override fun onClickPhone(pos: Int) {
+
+        mContactPhoneAdapter.selectedPos = pos
+        mContactPhoneAdapter.notifyDataSetChanged()
+        buttonSend.enabled = true
     }
 
 

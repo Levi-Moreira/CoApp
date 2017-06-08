@@ -76,7 +76,8 @@
             android:id="@+id/emailContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupContactMean">
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupContactMean"
+            tools:layout_editor_absoluteX="0dp">
 
 
             <Spinner
@@ -135,7 +136,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
@@ -147,10 +148,17 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/phoneContact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupContactMean">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupContactMean"
+            app:layout_constraintBottom_toBottomOf="@+id/emailContact"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="0dp"
+            app:layout_constraintStart_toStartOf="@+id/emailContact"
+            android:layout_marginStart="0dp">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/phoneList"
@@ -165,10 +173,9 @@
             android:id="@+id/buttonSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="68dp"
             android:layout_marginEnd="25dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/sign_in_button_background"
             android:enabled="false"
             android:text="@string/send"
@@ -178,7 +185,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailContact" />
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/emailContact" />
 
         <FrameLayout
             android:id="@+id/progressWheel"
