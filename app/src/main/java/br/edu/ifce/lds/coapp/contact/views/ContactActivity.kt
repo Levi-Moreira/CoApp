@@ -139,15 +139,18 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
                 val selectedName = mContactNames[spinner.selectedItemPosition]
                 val contactInfo = mContactInfo.findByName(selectedName)
 
-                val intent = Intent(Intent.ACTION_SENDTO)
-                intent.data = Uri.parse("mailto:") // only email apps should handle this
+                if (contactInfo != null) {
+                    val intent = Intent(Intent.ACTION_SENDTO)
+                    intent.data = Uri.parse("mailto:") // only email apps should handle this
 
-                intent.putExtra(Intent.EXTRA_EMAIL, contactInfo?.info)
-                intent.putExtra(Intent.EXTRA_SUBJECT, "[Contato] CoAPP: " + editTextSubject.text.toString())
-                intent.putExtra(Intent.EXTRA_TEXT, message.text.toString())
+                    val addresses: Array<String> = arrayOf(contactInfo.info)
+                    intent.putExtra(Intent.EXTRA_EMAIL,addresses )
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "[Contato] CoAPP : " + editTextSubject.text.toString())
+                    intent.putExtra(Intent.EXTRA_TEXT, message.text.toString())
 
-                if (intent.resolveActivity(packageManager) != null) {
-                    startActivity(intent)
+                    if (intent.resolveActivity(packageManager) != null) {
+                        startActivity(intent)
+                    }
                 }
             }
         }
