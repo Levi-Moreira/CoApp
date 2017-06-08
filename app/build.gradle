@@ -58,6 +58,8 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
     compile 'com.karumi:dexter:4.1.0'
     compile 'com.github.ganfra:material-spinner:1.1.1'
+    compile 'com.droidninja:filepicker:2.0.4'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

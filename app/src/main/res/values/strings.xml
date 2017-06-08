@@ -27,5 +27,10 @@
     <string name="send">Enviar</string>
     <string name="call">Ligar</string>
 
+    <string name="done">Adicionar</string>
+    <string name="attachments_title_text" formatted="false">Anexos (%d/%d)</string>
+    <string name="select_doc_text">Selecione um documento</string>
+    <string name="no_files_found">Sem arquivos</string>
+
 
 </resources>

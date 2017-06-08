@@ -29,11 +29,14 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import droidninja.filepicker.FilePickerBuilder
+import droidninja.filepicker.FilePickerConst
 import kotlinx.android.synthetic.main.activity_contact.*
 import org.jetbrains.anko.*
+import android.R.attr.data
 
 
-class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback {
+class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback, AttachmentFilesAdapter.PickFileCallback {
 
 
     //the presenter for this class
@@ -52,10 +55,11 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
     //the adapter for the phone list
     lateinit var mContactPhoneAdapter: PhoneContactAdapter
 
+    //file list for attachments
     var mFilesList = mutableListOf<Uri>()
 
 
-    val mFilesAdapter = AttachmentFilesAdapter(mFilesList)
+    val mFilesAdapter = AttachmentFilesAdapter(mFilesList, this)
 
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
@@ -144,10 +148,15 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
                     intent.data = Uri.parse("mailto:") // only email apps should handle this
 
                     val addresses: Array<String> = arrayOf(contactInfo.info)
-                    intent.putExtra(Intent.EXTRA_EMAIL,addresses )
+                    intent.putExtra(Intent.EXTRA_EMAIL, addresses)
                     intent.putExtra(Intent.EXTRA_SUBJECT, "[Contato] CoAPP : " + editTextSubject.text.toString())
                     intent.putExtra(Intent.EXTRA_TEXT, message.text.toString())
 
+                    val files: ArrayList<Uri> = arrayListOf()
+                    files.addAll(mFilesList.toList())
+                    files.removeAt(files.size - 1)
+
+                    intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files)
                     if (intent.resolveActivity(packageManager) != null) {
                         startActivity(intent)
                     }
@@ -244,6 +253,64 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         val slide = Slide()
         slide.duration = 1000
         window.enterTransition = slide
+    }
+
+    override fun onClickFile(pos: Int) {
+
+        if (pos == mFilesList.size - 1) {
+            //before sending calling intent, check for permissions
+            Dexter.withActivity(this)
+                    .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .withListener(object : PermissionListener {
+                        @SuppressLint("MissingPermission")
+                        override fun onPermissionGranted(response: PermissionGrantedResponse) {/* ... */
+                            pickFiles()
+                        }
+
+                        override fun onPermissionDenied(response: PermissionDeniedResponse) {/* ... */
+                        }
+
+                        override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {/* ... */
+                        }
+                    }).check()
+        }
+
+    }
+
+    private fun pickFiles() {
+
+        FilePickerBuilder.getInstance().setMaxCount(5)
+                .addFileSupport("Imagens", arrayOf(".png", ".jpg", ".JPEG", ".jpeg"))
+                .setActivityTheme(R.style.AppTheme)
+                .pickFile(this)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        when (requestCode) {
+            FilePickerConst.REQUEST_CODE_PHOTO -> {
+
+            }
+            FilePickerConst.REQUEST_CODE_DOC -> {
+                var docPaths = data?.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)
+                if (docPaths != null)
+                    addToView(docPaths)
+            }
+
+        }
+
+    }
+
+    private fun addToView(docPaths: ArrayList<String>) {
+        val first = mFilesList.removeAt(mFilesList.size - 1)
+        mFilesList.clear()
+        var i = mFilesList.size
+        for (path in docPaths) {
+            mFilesList.add(Uri.parse(path))
+            mFilesAdapter.notifyItemInserted(i++)
+        }
+        mFilesList.add(first)
     }
 
 

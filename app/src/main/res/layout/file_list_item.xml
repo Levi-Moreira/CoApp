@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:padding="10dp"
-    android:background="@drawable/login_edit_text_background"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_margin="5dp"
+    android:background="@drawable/login_edit_text_background"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/fileIcon"
@@ -21,12 +22,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:gravity="center"
         android:id="@+id/fileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="4dp"
-        android:text="Anexar\nDocumentos"
+        android:gravity="center"
+        android:text="Anexar Documentos"
         android:textAppearance="@style/FontQuickSand"
         android:textColor="@color/plain_white"
         android:textSize="14sp"
