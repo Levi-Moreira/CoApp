@@ -35,7 +35,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity
-            android:name=".contact.ContactActivity"
+            android:name=".contact.views.ContactActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

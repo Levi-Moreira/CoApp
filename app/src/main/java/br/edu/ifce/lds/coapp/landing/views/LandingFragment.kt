@@ -8,11 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.edu.ifce.lds.coapp.R.layout.fragment_landing
-import br.edu.ifce.lds.coapp.contact.ContactActivity
 import kotlinx.android.synthetic.main.fragment_landing.*
 import org.jetbrains.anko.onClick
-import org.jetbrains.anko.support.v4.startActivity
-import android.transition.Slide
 
 
 /**

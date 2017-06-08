@@ -1,8 +1,9 @@
-package br.edu.ifce.lds.coapp.contact
+package br.edu.ifce.lds.coapp.contact.presenter
 
 import br.edu.ifce.lds.coapp.common.BasePresenter
 import br.edu.ifce.lds.coapp.contact.dhandlers.ContactDataHandler
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
+import br.edu.ifce.lds.coapp.contact.views.ContactView
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import com.google.firebase.database.FirebaseDatabase
 

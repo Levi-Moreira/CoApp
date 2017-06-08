@@ -1,4 +1,4 @@
-package br.edu.ifce.lds.coapp.contact
+package br.edu.ifce.lds.coapp.contact.views
 
 import br.edu.ifce.lds.coapp.common.BaseView
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo

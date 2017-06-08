@@ -1,18 +1,21 @@
-package br.edu.ifce.lds.coapp.contact
+package br.edu.ifce.lds.coapp.contact.views
 
-import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Slide
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import br.edu.ifce.lds.coapp.R
-import br.edu.ifce.lds.coapp.common.BaseActivity
-import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
-import kotlinx.android.synthetic.main.activity_contact.*
 import android.widget.*
+import br.edu.ifce.lds.coapp.R.layout.activity_contact
+import br.edu.ifce.lds.coapp.common.BaseActivity
+import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
+import br.edu.ifce.lds.coapp.contact.adapters.SpinnerCustomAdapter
+import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
+import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
 import br.edu.ifce.lds.coapp.utils.listWithNames
+import kotlinx.android.synthetic.main.activity_contact.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.onCheckedChange
 
@@ -31,9 +34,9 @@ class ContactActivity : BaseActivity(), ContactView {
     var mContactPhoneAdapter = PhoneContactAdapter(mContactPhones)
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact)
+        setContentView(activity_contact)
 
         rbtEmail.isChecked = true
 
@@ -57,11 +60,11 @@ class ContactActivity : BaseActivity(), ContactView {
             if (selectedIndex == 0) {
                 emailContact.visibility = VISIBLE
                 phoneContact.visibility = GONE
-                buttonSend.text = getString(R.string.send)
+                buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.send)
             } else {
                 emailContact.visibility = GONE
                 phoneContact.visibility = VISIBLE
-                buttonSend.text = getString(R.string.call)
+                buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.call)
             }
         })
 
@@ -90,7 +93,7 @@ class ContactActivity : BaseActivity(), ContactView {
     }
 
     override fun onError(message: String?) {
-        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Error", android.widget.Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoading() {

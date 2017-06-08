@@ -1,16 +1,13 @@
 package br.edu.ifce.lds.coapp.contact.dhandlers
 
-import br.edu.ifce.lds.coapp.contact.ContactPresenter
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfoFirebaseKey
-import br.edu.ifce.lds.coapp.firebase.FirebaseCloud
-import br.edu.ifce.lds.coapp.firebase.GetContactsInfoResponse
+import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import io.reactivex.Observable
 
 
 /**
@@ -19,11 +16,6 @@ import io.reactivex.Observable
 
 class ContactDataHandler(val mPrefs: PreferencesUtil, val database: DatabaseReference, val presenter: ContactPresenter) {
 
-    private val theCloud = FirebaseCloud()
-
-    fun getContactInfo(): Observable<GetContactsInfoResponse> {
-        return theCloud.apiService.getContactsInfo(mPrefs.getTokenFormatted())
-    }
 
     fun getContactInfoFirebase() {
 
