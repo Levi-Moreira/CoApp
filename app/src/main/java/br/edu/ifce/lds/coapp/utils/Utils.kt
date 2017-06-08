@@ -1,5 +1,7 @@
 package br.edu.ifce.lds.coapp.utils
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 
@@ -25,5 +27,35 @@ fun List<ContactInfo>.listWithNames(): MutableList<String> {
     }
 
     return names
+}
+
+/**
+ * Either returns a contact containing the given name or null
+ */
+fun LinkedHashMap<String, ContactInfo>.findByName(name: String): ContactInfo?{
+    for ((key, contact) in this) {
+        if(contact.name == name){
+            return contact
+        }
+    }
+
+    return null
+}
+
+/**
+ * Lambda for edit text textChangeListener
+ */
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+    })
 }
 

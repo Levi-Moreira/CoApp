@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextWatcher
 import android.transition.Slide
 import android.view.View.*
 import android.widget.LinearLayout
@@ -18,6 +19,8 @@ import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
+import br.edu.ifce.lds.coapp.utils.afterTextChanged
+import br.edu.ifce.lds.coapp.utils.findByName
 import br.edu.ifce.lds.coapp.utils.listWithNames
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -26,24 +29,26 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_contact.*
-import org.jetbrains.anko.enabled
-import org.jetbrains.anko.find
-import org.jetbrains.anko.onCheckedChange
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.*
 
 
 class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback {
 
 
+    //the presenter for this class
     lateinit var mPresenter: ContactPresenter
 
+    //the list of contact info brought from the backend
     lateinit var mContactInfo: LinkedHashMap<String, ContactInfo>
 
+    //filtered lists of phones and emails
     var mContactPhones = mutableListOf<ContactInfo>()
     var mContactNames = mutableListOf<String>()
+
+
     var mKeys: MutableList<String> = mutableListOf()
 
-
+    //the adapter for the phone list
     lateinit var mContactPhoneAdapter: PhoneContactAdapter
 
 
@@ -51,43 +56,57 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         super.onCreate(savedInstanceState)
         setContentView(activity_contact)
 
+        //check the email option at first
         rbtEmail.isChecked = true
 
+        //start up the adapter
         mContactPhoneAdapter = PhoneContactAdapter(mContactPhones, this)
+
+        //start up the presenter
         mPresenter = ContactPresenter(mView = this, prefs = PreferencesUtil(this))
+
+        //retrieve list of contacts from the backend
         mPresenter.getContactInfo()
-
-
 
         setUpViews()
     }
 
+    /**
+     * Set up clicks and listeners for some views
+     */
     private fun setUpViews() {
 
         mContactNames.add("Selecione o destinatário")
 
 
+        //when changed the radio button selected, change the options shown
         radioGroupContactMean.onCheckedChange({ radioGroup, i ->
 
             val selectedIndex = radioGroup?.indexOfChild(radioGroup?.find(i))
 
+            //if selected email
             if (selectedIndex == 0) {
                 emailContact.visibility = VISIBLE
                 phoneContact.visibility = INVISIBLE
                 buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.send)
             } else {
+                //if selected phone
                 emailContact.visibility = INVISIBLE
                 phoneContact.visibility = VISIBLE
                 buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.call)
             }
         })
 
+        //when clicks the "Enviar" or "Ligar" button
         buttonSend.onClick {
+
+            //check if it is phone
             if (rbtPhone.isChecked) {
                 val number = mContactPhoneAdapter.getSelectedPhone()
                 val callIntent = Intent(Intent.ACTION_CALL)
                 callIntent.data = Uri.parse("tel:" + number)
 
+                //before sending calling intent, check for permissions
                 Dexter.withActivity(this)
                         .withPermission(android.Manifest.permission.CALL_PHONE)
                         .withListener(object : PermissionListener {
@@ -103,29 +122,71 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
                             }
                         }).check()
 
+            } else {
+                //if not, it must be email
+
+                val selectedName = mContactNames[spinner.selectedItemPosition]
+                val contactInfo = mContactInfo.findByName(selectedName)
+
+                val intent = Intent(Intent.ACTION_SENDTO)
+                intent.data = Uri.parse("mailto:") // only email apps should handle this
+
+                intent.putExtra(Intent.EXTRA_EMAIL, contactInfo?.info)
+                intent.putExtra(Intent.EXTRA_SUBJECT, "[Contato] CoAPP: " + editTextSubject.text.toString())
+                intent.putExtra(Intent.EXTRA_TEXT, message.text.toString())
+
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
             }
         }
 
-        val slide = Slide()
-        slide.duration = 1000
-        window.enterTransition = slide
+
+        message.afterTextChanged {
+            buttonSend.enabled = false
+
+            if (!it.isEmpty() && spinner.selectedItemPosition != 0 && !editTextSubject.text.toString().isEmpty()) {
+                buttonSend.enabled = true
+            }
+        }
+
+
+        editTextSubject.afterTextChanged {
+            buttonSend.enabled = false
+
+            if (!it.isEmpty() && spinner.selectedItemPosition != 0 && !message.text.toString().isEmpty()) {
+                buttonSend.enabled = true
+            }
+        }
+
+        spinner.onItemSelectedListener {
+            buttonSend.enabled = false
+
+            if (!message.text.toString().isEmpty() && spinner.selectedItemPosition != 0 && !editTextSubject.text.toString().isEmpty()) {
+                buttonSend.enabled = true
+            }
+        }
+        setUpAnimations()
     }
+
 
     override fun retrievedContactInfo(contactsInfo: LinkedHashMap<String, ContactInfo>) {
 
+        //save retreived information
         mContactInfo = contactsInfo
 
+        //separate information
         mContactNames.addAll(contactsInfo.values.toMutableList().filter { it.type == ContactType.email.name }.listWithNames())
         mContactPhones.addAll(contactsInfo.values.filter { it.type == ContactType.phone.name })
         mKeys.addAll(contactsInfo.keys)
 
-        // val adapter = ArrayAdapter<String>(this, R.layout.item_spinner, mContactNames)
+        //add emails to spinner
         val adapter = SpinnerCustomAdapter(this, mContactNames, R.layout.item_spinner, R.layout.spinner_dropdown_item)
-
         spinner.adapter = adapter
 
+        //add phones to list
         phoneList.adapter = mContactPhoneAdapter
-        val mLayoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         phoneList.layoutManager = mLayoutManager
 
     }
@@ -147,6 +208,12 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         mContactPhoneAdapter.selectedPos = pos
         mContactPhoneAdapter.notifyDataSetChanged()
         buttonSend.enabled = true
+    }
+
+    private fun setUpAnimations() {
+        val slide = Slide()
+        slide.duration = 1000
+        window.enterTransition = slide
     }
 
 
