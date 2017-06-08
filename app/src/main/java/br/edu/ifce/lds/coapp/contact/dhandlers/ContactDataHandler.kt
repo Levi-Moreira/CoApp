@@ -14,14 +14,13 @@ import com.google.firebase.database.ValueEventListener
  * Created by ellca on 06/06/2017.
  */
 
-class ContactDataHandler(val mPrefs: PreferencesUtil, val database: DatabaseReference, val presenter: ContactPresenter) {
+class ContactDataHandler(val database: DatabaseReference, val presenter: ContactPresenter) {
 
 
     fun getContactInfoFirebase() {
 
         val cInfoList = linkedMapOf<String, ContactInfo>()
         val contactInfoRef = database.child(ContactInfoFirebaseKey)
-
 
 
         contactInfoRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -36,7 +35,7 @@ class ContactDataHandler(val mPrefs: PreferencesUtil, val database: DatabaseRefe
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                //Log.e(TAG, "onCancelled", databaseError.toException())
+                presenter.failedToRetrieve()
             }
         })
 

@@ -14,33 +14,22 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ContactPresenter(val prefs: PreferencesUtil, val mView: ContactView) : BasePresenter<ContactView> {
 
-    val mDataHandler = ContactDataHandler(prefs, FirebaseDatabase.getInstance().reference, this)
+    val mDataHandler = ContactDataHandler(FirebaseDatabase.getInstance().reference, this)
 
 
     fun getContactInfo() {
         mView.showLoading()
-//        mDataHandler
-//                .getContactInfo()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({ info ->
-//                    //on completed
-//                    mView.hideLoading()
-//                    mView.retrievedContactInfo(info.contact_info)
-//                }, { onError ->
-//                    //on error
-//                    mView.hideLoading()
-//                    mView.onError(onError.message)
-//                }, {
-//
-//                })
-
         mDataHandler.getContactInfoFirebase()
     }
 
     fun retrievedInfo(contactInfoList: LinkedHashMap<String, ContactInfo>) {
         mView.hideLoading()
         mView.retrievedContactInfo(contactInfoList)
+    }
+
+    fun failedToRetrieve() {
+        mView.hideLoading()
+        mView.onError("Ocorreu um erro, por favor tente novamente.")
     }
 
 }
