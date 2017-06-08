@@ -7,4 +7,8 @@ enum class ContactType {
     email, phone
 }
 
-data class ContactInfo(var type: String, var name: String, var info: String)
+const val ContactInfoFirebaseKey = "contact_info"
+
+open class ContactInfo(var type: String = "", var name: String = "", var info: String = "") {
+
+}

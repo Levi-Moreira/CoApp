@@ -8,7 +8,7 @@ import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
  */
 
 open interface ContactView : BaseView {
-    fun retrievedContactInfo(contactsInfo: List<ContactInfo>)
+    fun retrievedContactInfo(contactsInfo: LinkedHashMap<String, ContactInfo>)
 
     fun onError(message: String?)
 
