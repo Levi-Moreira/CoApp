@@ -34,6 +34,9 @@ import droidninja.filepicker.FilePickerConst
 import kotlinx.android.synthetic.main.activity_contact.*
 import org.jetbrains.anko.*
 import android.R.attr.data
+import android.content.ActivityNotFoundException
+import android.support.v4.content.FileProvider
+import java.io.File
 
 
 class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback, AttachmentFilesAdapter.PickFileCallback {
@@ -144,8 +147,10 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
                 val contactInfo = mContactInfo.findByName(selectedName)
 
                 if (contactInfo != null) {
-                    val intent = Intent(Intent.ACTION_SENDTO)
-                    intent.data = Uri.parse("mailto:") // only email apps should handle this
+                    val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
+
+                    intent.type = "text/html"
+                    // intent.data = Uri.parse("mailto:") // only email apps should handle this
 
                     val addresses: Array<String> = arrayOf(contactInfo.info)
                     intent.putExtra(Intent.EXTRA_EMAIL, addresses)
@@ -153,13 +158,23 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
                     intent.putExtra(Intent.EXTRA_TEXT, message.text.toString())
 
                     val files: ArrayList<Uri> = arrayListOf()
-                    files.addAll(mFilesList.toList())
-                    files.removeAt(files.size - 1)
+
+                    for (file in mFilesList) {
+                        if (mFilesList.indexOf(file) != mFilesList.size - 1)
+                            files.add(FileProvider.getUriForFile(this, "br.edu.ifce.lds.coapp.droidninja.filepicker.provider", File(file.path)))
+                    }
+                    intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 
                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files)
-                    if (intent.resolveActivity(packageManager) != null) {
-                        startActivity(intent)
+
+                    try {
+                        if (intent.resolveActivity(packageManager) != null) {
+                            startActivity(intent)
+                        }
+                    } catch (e: ActivityNotFoundException) {
+                        Toast.makeText(this, "Você não tem nenhum aplicativo para envio de emails.", Toast.LENGTH_LONG).show()
                     }
+
                 }
             }
         }
