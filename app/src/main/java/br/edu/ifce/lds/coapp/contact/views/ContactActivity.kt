@@ -106,13 +106,24 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
             if (selectedIndex == 0) {
                 emailContact.visibility = VISIBLE
                 phoneContact.visibility = INVISIBLE
-                buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.send)
+                buttonSend.text = getString(R.string.send)
+                message.text.clear()
+                editTextSubject.text.clear()
+                spinner.setSelection(0)
+                val addButton = mFilesList.removeAt(mFilesList.size - 1)
+                mFilesList.clear()
+                mFilesList.add(addButton)
+                mFilesAdapter.notifyDataSetChanged()
             } else {
                 //if selected phone
                 emailContact.visibility = INVISIBLE
                 phoneContact.visibility = VISIBLE
-                buttonSend.text = getString(br.edu.ifce.lds.coapp.R.string.call)
+                buttonSend.text = getString(R.string.call)
+                mContactPhoneAdapter.selectedPos = -1
+                mContactPhoneAdapter.notifyDataSetChanged()
             }
+
+            checkButtonForSelection(selectedIndex)
         })
 
         //when clicks the "Enviar" or "Ligar" button
@@ -207,6 +218,15 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         setUpAnimations()
     }
 
+    private fun checkButtonForSelection(selectedIndex: Int?) {
+        if (selectedIndex == 0) {
+            buttonSend.enabled = !message.text.toString().isEmpty() && spinner.selectedItemPosition != 0 && !editTextSubject.text.toString().isEmpty()
+        } else {
+            buttonSend.enabled = mContactPhoneAdapter.hasSelectedPos
+        }
+
+    }
+
 
     override fun retrievedContactInfo(contactsInfo: LinkedHashMap<String, ContactInfo>) {
 
@@ -271,8 +291,11 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         window.enterTransition = slide
     }
 
-    override fun onClickFile(pos: Int) {
 
+    /**
+     * Respond to clicking in the file list
+     */
+    override fun onClickFile(pos: Int) {
         if (pos == mFilesList.size - 1) {
             //before sending calling intent, check for permissions
             Dexter.withActivity(this)
@@ -289,12 +312,16 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
                         override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {/* ... */
                         }
                     }).check()
+        } else {
+            //
         }
 
     }
 
+    /**
+     * Calls picker activity to get files
+     */
     private fun pickFiles() {
-
         FilePickerBuilder.getInstance().setMaxCount(5)
                 .addFileSupport("Imagens", arrayOf(".png", ".jpg", ".JPEG", ".jpeg"))
                 .setActivityTheme(R.style.AppTheme)
@@ -302,6 +329,9 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
     }
 
 
+    /**
+     * Treat the receiving of documents from the picking activity
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         when (requestCode) {
@@ -318,13 +348,16 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
     }
 
+    /**
+     * Push docs picked to the view
+     */
     private fun addToView(docPaths: ArrayList<String>) {
         val first = mFilesList.removeAt(mFilesList.size - 1)
-        mFilesList.clear()
-        var i = mFilesList.size
+        //mFilesList.clear()
+
         for (path in docPaths) {
             mFilesList.add(Uri.parse(path))
-            mFilesAdapter.notifyItemInserted(i++)
+            mFilesAdapter.notifyItemInserted(mFilesList.size - 1)
         }
         mFilesList.add(first)
     }

@@ -60,4 +60,5 @@ class AttachmentFilesAdapter(val fileList: List<Uri>, val mCallback: PickFileCal
     interface PickFileCallback {
         fun onClickFile(pos: Int)
     }
+
 }

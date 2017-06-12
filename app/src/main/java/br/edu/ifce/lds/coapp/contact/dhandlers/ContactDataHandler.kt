@@ -17,21 +17,6 @@ import java.util.concurrent.TimeoutException
 
 class ContactDataHandler(val database: DatabaseReference, val presenter: ContactPresenter) {
 
-    var connectionStatus: Boolean = false
-
-    init {
-
-        val connectedRef = database.child(".info/connected")
-        connectedRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                connectionStatus = snapshot.getValue(Boolean::class.java)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                connectionStatus = false
-            }
-        })
-    }
 
     fun getContactInfoFirebase() {
 
@@ -41,16 +26,12 @@ class ContactDataHandler(val database: DatabaseReference, val presenter: Contact
         val infoEventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                if (connectionStatus) {
-                    for (singleSnapshot in dataSnapshot.children) {
-                        val value = singleSnapshot.getValue(ContactInfo::class.java)
-                        val key = singleSnapshot.key
-                        cInfoList[key] = value
-                    }
-                    presenter.retrievedInfo(cInfoList)
-                } else {
-                    presenter.connectionProblem()
+                for (singleSnapshot in dataSnapshot.children) {
+                    val value = singleSnapshot.getValue(ContactInfo::class.java)
+                    val key = singleSnapshot.key
+                    cInfoList[key] = value
                 }
+                presenter.retrievedInfo(cInfoList)
 
             }
 
@@ -59,11 +40,8 @@ class ContactDataHandler(val database: DatabaseReference, val presenter: Contact
             }
         }
 
-        if(connectionStatus) {
-            contactInfoRef.addListenerForSingleValueEvent(infoEventListener)
-        }else{
-            presenter.connectionProblem()
-        }
+
+        contactInfoRef.addListenerForSingleValueEvent(infoEventListener)
 
 
     }

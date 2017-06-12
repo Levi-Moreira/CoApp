@@ -18,7 +18,10 @@ import org.jetbrains.anko.find
  */
 
 class PhoneContactAdapter(val mContactList: MutableList<ContactInfo>, val mCallback: OnClickPhoneCallback) : RecyclerView.Adapter<PhoneContactAdapter.PhoneContactViewHolder>() {
-
+    val hasSelectedPos: Boolean
+        get() {
+            return selectedPos != -1
+        }
 
     var selectedPos = -1
 
