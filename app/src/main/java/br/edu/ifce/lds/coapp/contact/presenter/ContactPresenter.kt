@@ -32,4 +32,9 @@ class ContactPresenter(val prefs: PreferencesUtil, val mView: ContactView) : Bas
         mView.onError("Ocorreu um erro, por favor tente novamente.")
     }
 
+    fun connectionProblem() {
+        mView.hideLoading()
+        mView.onError("Erro de conexão. Por favor, verfifique se você está conectado(a).")
+    }
+
 }
