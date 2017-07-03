@@ -1,5 +1,6 @@
 package br.edu.ifce.lds.coapp.contact.dhandlers
 
+import br.edu.ifce.lds.coapp.apiservice.CoAppBackend
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfoFirebaseKey
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
@@ -7,6 +8,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 /**
@@ -15,8 +18,26 @@ import com.google.firebase.database.ValueEventListener
 
 class ContactDataHandler(val database: DatabaseReference, val presenter: ContactPresenter) {
 
+    val backend = CoAppBackend()
+
 
     fun getContactInfoFirebase() {
+
+
+        backend
+                .backendAPI
+                .getContacts(backend.API_PUBLIC_TOKEN)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            contacts ->
+                        },
+                        {
+                            error ->
+
+                        }
+                )
 
         val cInfoList = linkedMapOf<String, ContactInfo>()
         val contactInfoRef = database.child(ContactInfoFirebaseKey)
