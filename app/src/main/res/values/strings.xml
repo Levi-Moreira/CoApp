@@ -31,6 +31,8 @@
     <string name="attachments_title_text" formatted="false">Anexos (%d/%d)</string>
     <string name="select_doc_text">Selecione um documento</string>
     <string name="no_files_found">Sem arquivos</string>
+    <string name="plans">Planos</string>
+    <string name="our_plans">Nossos Planos</string>
 
 
 </resources>

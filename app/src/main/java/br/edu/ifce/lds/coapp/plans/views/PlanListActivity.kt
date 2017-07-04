@@ -1,8 +1,8 @@
 package br.edu.ifce.lds.coapp.plans.views
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import android.view.View
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.common.BaseActivity
@@ -23,6 +23,9 @@ class PlanListActivity : BaseActivity(), PlanListView, PlanListAdapter.OnClickPo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plan_list)
+        setTitle(R.string.our_plans)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mPresenter = PlanListPresenter(this, PreferencesUtil(this))
         mPresenter.getPlans()
@@ -46,5 +49,15 @@ class PlanListActivity : BaseActivity(), PlanListView, PlanListAdapter.OnClickPo
 
     override fun hideLoading() {
         progressWheel.visibility = View.GONE
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+
+        when (id) {
+            android.R.id.home -> onBackPressed()
+        }
+
+        return true
     }
 }
