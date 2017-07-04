@@ -15,6 +15,10 @@ class CoAppBackend() {
 
     lateinit var backendAPI: BackendAPI
 
+    val publicTokenFormatted
+        get() = "Token " + API_PUBLIC_TOKEN
+
+
     init {
         val retrofit = Retrofit
                 .Builder()
