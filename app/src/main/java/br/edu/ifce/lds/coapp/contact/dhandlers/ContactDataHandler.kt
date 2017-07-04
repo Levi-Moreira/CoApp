@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by ellca on 06/06/2017.
  */
 
-class ContactDataHandler(val database: DatabaseReference, val presenter: ContactPresenter) {
+class ContactDataHandler( val presenter: ContactPresenter) {
 
     val TAG = "ContactDataHandler"
 

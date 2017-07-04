@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ContactPresenter(val prefs: PreferencesUtil, val mView: ContactView) : BasePresenter<ContactView> {
 
-    val mDataHandler = ContactDataHandler(FirebaseDatabase.getInstance().reference, this)
+    val mDataHandler = ContactDataHandler(this)
 
 
     fun getContactInfo() {
