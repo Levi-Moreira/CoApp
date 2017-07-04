@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme"  parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -27,6 +27,11 @@
     <style name="FontQuickSand" parent="android:TextAppearance">
         <!-- Custom Attr-->
         <item name="fontPath">font/Quicksand-Regular.ttf</item>
+    </style>
+
+    <style name="FontQuickSandBold" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="fontPath">font/Quicksand-Bold.ttf</item>
     </style>
 
     <style name="spinnerItemStyle" parent="android:Widget.TextView">

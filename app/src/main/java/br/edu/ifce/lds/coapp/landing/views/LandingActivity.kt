@@ -11,6 +11,7 @@ import br.edu.ifce.lds.coapp.R.anim.*
 import br.edu.ifce.lds.coapp.R.layout.activity_landing
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.contact.views.ContactActivity
+import br.edu.ifce.lds.coapp.plans.views.PlanListActivity
 import kotlinx.android.synthetic.main.activity_landing.*
 import org.jetbrains.anko.onClick
 import org.jetbrains.anko.startActivity
@@ -108,8 +109,11 @@ class LandingActivity : BaseActivity(), LoginFragment.ILoginFragmentCallbacks, L
      */
     override fun startContactActivity() {
         startActivity<ContactActivity>()
-
         overridePendingTransition(R.anim.fragment_slide_right_enter, fragment_slide_left_exit)
     }
 
+    override fun startPlansActivity() {
+        startActivity<PlanListActivity>()
+        overridePendingTransition(R.anim.fragment_slide_right_enter, fragment_slide_left_exit)
+    }
 }

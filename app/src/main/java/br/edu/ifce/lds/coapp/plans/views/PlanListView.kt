@@ -9,4 +9,6 @@ import br.edu.ifce.lds.coapp.plans.entities.Plan
 
 interface PlanListView : BaseView {
     fun renderPlans(plans: ArrayList<Plan>)
+    fun showLoading()
+    fun hideLoading()
 }
