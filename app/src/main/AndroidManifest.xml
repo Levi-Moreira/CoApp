@@ -54,7 +54,7 @@
             android:name=".contact.views.ContactActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".plans.PlanListActivity"></activity>
+        <activity android:name=".plans.views.PlanListActivity"></activity>
     </application>
 
 </manifest>
