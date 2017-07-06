@@ -29,4 +29,11 @@ interface BackendAPI {
     fun getPlanList(
             @Path("coworking_id") coworking_id: String,
             @Header("Authorization") auth_token: String): Observable<Response<ArrayList<Plan>>>
+
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @GET("/api/coworkings/{coworking_id}/plans/{plan_id}")
+    fun getPlan(
+            @Path("coworking_id") coworking_id: String,
+            @Path("plan_id") plan_id: String,
+            @Header("Authorization") auth_token: String): Observable<Response<Plan>>
 }

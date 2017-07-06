@@ -11,8 +11,14 @@ import br.edu.ifce.lds.coapp.plans.entities.Plan
 import br.edu.ifce.lds.coapp.plans.presenter.PlanListPresenter
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_plan_list.*
+import org.jetbrains.anko.startActivity
+
+val PLAN_ID = "PLAN_ID"
 
 class PlanListActivity : BaseActivity(), PlanListView, PlanListAdapter.OnClickPostListener {
+
+
+    val PLAN_ID = "PLAN_ID"
 
     lateinit var mPresenter: PlanListPresenter
 
@@ -40,7 +46,9 @@ class PlanListActivity : BaseActivity(), PlanListView, PlanListAdapter.OnClickPo
     }
 
     override fun onClickPost(position: Int) {
+        val id = mPlanList[position].id
 
+        startActivity<PlanDetailsActivity>(PLAN_ID to id.toString())
     }
 
     override fun showLoading() {
