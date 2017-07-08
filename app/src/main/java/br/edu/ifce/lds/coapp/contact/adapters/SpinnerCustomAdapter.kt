@@ -11,6 +11,8 @@ import android.widget.CheckedTextView
 import android.widget.SpinnerAdapter
 import android.widget.TextView
 import br.edu.ifce.lds.coapp.R
+import kotlinx.android.synthetic.main.item_spinner.view.*
+import kotlinx.android.synthetic.main.spinner_dropdown_item.view.*
 import org.jetbrains.anko.textColor
 
 /**
@@ -22,11 +24,11 @@ open class SpinnerCustomAdapter(val context: Context, val titles: MutableList<St
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val v = LayoutInflater.from(context).inflate(itemResouce, parent, false)
-        val textView = v.findViewById(R.id.tv_item_spinner) as TextView
-        textView.text = titles[position]
+       // val textView = v.findViewById(R.id.tv_item_spinner) as TextView
+        v.tv_item_spinner.text = titles[position]
 
         if (position == 0) {
-            textView.textColor = Color.parseColor("#55ffffff");
+            v.tv_item_spinner.textColor = Color.parseColor("#55ffffff")
         }
 
         return v
@@ -41,11 +43,11 @@ open class SpinnerCustomAdapter(val context: Context, val titles: MutableList<St
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val v = LayoutInflater.from(context).inflate(dropDownResource, parent, false)
 
-        val textView = v.findViewById(R.id.tv_dropdown) as CheckedTextView
-        textView.text = titles[position]
+       // val textView = v.findViewById(R.id.tv_dropdown) as CheckedTextView
+        v.tv_dropdown.text = titles[position]
 
         if (position == 0) {
-            textView.setTypeface(null, Typeface.BOLD)
+            v.tv_dropdown.setTypeface(null, Typeface.BOLD)
         }
 
         return v

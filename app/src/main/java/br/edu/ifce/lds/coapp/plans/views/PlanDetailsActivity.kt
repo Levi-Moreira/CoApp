@@ -2,6 +2,7 @@ package br.edu.ifce.lds.coapp.plans.views
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.NestedScrollingParent
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.plans.entities.Plan
@@ -11,6 +12,7 @@ import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 class PlanDetailsActivity : BaseActivity(), PlanDetailView {
 
     lateinit var mPresenter: PlanDetailPresenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,7 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
             mPresenter.getPlan(planId as String)
         }
     }
+
 
 
     override fun requestError() {

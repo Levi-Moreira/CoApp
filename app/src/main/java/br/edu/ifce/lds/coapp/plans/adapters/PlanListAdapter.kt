@@ -38,7 +38,12 @@ class PlanListAdapter(val context: Context, var plans: MutableList<Plan>, val cl
         return PlanListViewHolder(postView)
     }
 
-    inner class PlanListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class PlanListViewHolder(val item: View) : RecyclerView.ViewHolder(item), View.OnClickListener {
+
+        init {
+            item.setOnClickListener(this)
+        }
+
         override fun onClick(v: View?) {
             clickCallback.onClickPost(adapterPosition)
         }
