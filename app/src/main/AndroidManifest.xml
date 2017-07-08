@@ -39,7 +39,7 @@
         <activity
             android:name=".landing.views.LandingActivity"
             android:label="@string/title_activity_landing"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.FullScreen" />
         <activity android:name=".intro.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,10 +52,12 @@
         <activity android:name=".MainMenuActivity" />
         <activity
             android:name=".contact.views.ContactActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.FullScreen"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".plans.views.PlanListActivity" />
-        <activity android:name=".plans.views.PlanDetailsActivity"></activity>
+        <activity
+            android:name=".plans.views.PlanDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
