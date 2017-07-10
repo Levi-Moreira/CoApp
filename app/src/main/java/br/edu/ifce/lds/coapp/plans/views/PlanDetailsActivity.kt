@@ -42,6 +42,7 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
     override fun renderPlan(plan: Plan) {
 
         toolbar.title = plan.name
+        collapsingToolbar.title = plan.name
 
 
     }

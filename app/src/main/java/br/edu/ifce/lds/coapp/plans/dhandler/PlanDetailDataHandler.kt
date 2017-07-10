@@ -18,7 +18,7 @@ class PlanDetailDataHandler(val presenter: PlanDetailPresenter, val mPrefs: Pref
     fun getPlan(planId: String) {
 
         backend.backendAPI
-                .getPlan("1", planId, backend.API_PUBLIC_TOKEN)
+                .getPlan("1", planId, backend.publicTokenFormatted)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
