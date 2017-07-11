@@ -6,8 +6,8 @@ import com.orm.SugarRecord
  * Created by levi on 04/07/17.
  */
 
-class ResourcePlan(resource: Resource, quantity_hours: Int)
+class ResourcePlan(val resource: Resource, val quantity_hours: Int)
 
-class Resource(name: String, description: String, price: Float) : SugarRecord<Resource>() {
+class Resource(val name: String, val description: String, val price: Float) : SugarRecord<Resource>() {
 
 }

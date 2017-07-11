@@ -7,7 +7,7 @@ import com.orm.SugarRecord
  */
 class Plan(var name: String, var description: String, var price: Float) : SugarRecord<Plan>() {
 
-    lateinit var resurces: ArrayList<ResourcePlan>
+    lateinit var resources: ArrayList<ResourcePlan>
     lateinit var rooms: ArrayList<RoomPlan>
     lateinit var items: ArrayList<ItemPlan>
 }

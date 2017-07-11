@@ -5,6 +5,9 @@
     <color name="colorAccent">#8BC34A</color>
     <color name="colorAccentDisabled">#9a9a9a</color>
     <color name="colorAccentFaded">#9acd5e</color>
+    <color name="activityBackgroundGray">#f2f2f2</color>
+
+
 
 
     <color name="menu_back_item_color_pressed">#66000000</color>
