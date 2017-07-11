@@ -234,8 +234,8 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         mContactInfo = contactsInfo
 
         //separate information
-        mContactNames.addAll(contactsInfo.values.toMutableList().filter { it.type == ContactType.email.name }.listWithNames())
-        mContactPhones.addAll(contactsInfo.values.filter { it.type == ContactType.phone.name })
+        mContactNames.addAll(contactsInfo.values.toMutableList().filter { it.type == ContactType.email }.listWithNames())
+        mContactPhones.addAll(contactsInfo.values.filter { it.type == ContactType.phone })
         mKeys.addAll(contactsInfo.keys)
 
         //add emails to spinner

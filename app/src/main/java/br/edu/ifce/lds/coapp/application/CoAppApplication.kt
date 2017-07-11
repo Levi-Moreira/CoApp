@@ -17,7 +17,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig
  */
 @ReportsCrashes(mode = ReportingInteractionMode.TOAST, resToastText = R.string.crash_toast_text, formUri = "") //mailTo = "levi.m.albuquerque@gmail.com",
 
-class CoAppApplication : Application() {
+class CoAppApplication : com.orm.SugarApp() {
 
     override fun onCreate() {
         super.onCreate()

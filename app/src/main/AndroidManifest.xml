@@ -15,10 +15,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:name">
+        tools:replace="icon, label">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="DATABASE"
+            android:value="coapp.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.example" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -27,7 +39,7 @@
         <activity
             android:name=".landing.views.LandingActivity"
             android:label="@string/title_activity_landing"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.FullScreen" />
         <activity android:name=".intro.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,13 +48,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".common.BaseActivity" />
-        <activity android:name=".LoginActivity" />
+
         <activity android:name=".MainMenuActivity" />
         <activity
             android:name=".contact.views.ContactActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.FullScreen"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".pre_plans.views.PlansActivity"></activity>
+        <activity android:name=".plans.views.PlanListActivity" />
+        <activity
+            android:name=".plans.views.PlanDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

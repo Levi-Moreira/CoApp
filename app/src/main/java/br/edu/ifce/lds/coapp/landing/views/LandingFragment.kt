@@ -39,7 +39,8 @@ class LandingFragment : Fragment() {
     fun setUpViews() {
 
         buttonPlans.onClick {
-            android.widget.Toast.makeText(this.context, br.edu.ifce.lds.coapp.R.string.meet_ou_plans, android.widget.Toast.LENGTH_SHORT).show()
+            mLandingCallbacks.startPlansActivity()
+
         }
 
         buttonEmergencySchedule.onClick {
@@ -69,6 +70,7 @@ class LandingFragment : Fragment() {
 
     interface ILandingCallbacks {
         fun startContactActivity()
+        fun startPlansActivity()
     }
 
 }// Required empty public constructor
