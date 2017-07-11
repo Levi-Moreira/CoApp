@@ -10,10 +10,10 @@ enum class ItemType {
     consumable
 }
 
-class ItemPlan(item: Item, quantity: Int) {
+class ItemPlan(val item: Item, val quantity: Int) {
 
 }
 
-class Item(name: String, description: String, type: ItemType) : SugarRecord<Item>() {
+class Item(val name: String,val description: String, val type: ItemType) : SugarRecord<Item>() {
 
 }

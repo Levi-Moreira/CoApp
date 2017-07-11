@@ -1,11 +1,14 @@
 package br.edu.ifce.lds.coapp.plans.views
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.common.BaseActivity
+import br.edu.ifce.lds.coapp.plans.adapters.ItemsListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.ResourcesListAdapter
+import br.edu.ifce.lds.coapp.plans.entities.ItemPlan
 import br.edu.ifce.lds.coapp.plans.entities.Plan
 import br.edu.ifce.lds.coapp.plans.entities.ResourcePlan
 import br.edu.ifce.lds.coapp.plans.presenter.PlanDetailPresenter
@@ -17,8 +20,10 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
     lateinit var mPresenter: PlanDetailPresenter
 
     lateinit var mResourcesAdapter: ResourcesListAdapter
+    lateinit var mItemsAdapter: ItemsListAdapter
 
     var mResources = mutableListOf<ResourcePlan>()
+    var mItems = mutableListOf<ItemPlan>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +35,13 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
         mResourcesAdapter = ResourcesListAdapter(mResources)
         resourcesList.adapter = mResourcesAdapter
         resourcesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        resourcesList.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+
+
+        mItemsAdapter = ItemsListAdapter(mItems)
+        servicesList.adapter = mItemsAdapter
+        servicesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        servicesList.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
 
         val planId = intent.extras[PLAN_ID]
 
@@ -55,6 +67,10 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
         mResources.clear()
         mResources.addAll(plan.resources)
         mResourcesAdapter.notifyDataSetChanged()
+
+        mItems.clear()
+        mItems.addAll(plan.items)
+        mItemsAdapter.notifyDataSetChanged()
 
 
     }

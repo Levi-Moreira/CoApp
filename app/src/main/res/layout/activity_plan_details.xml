@@ -135,21 +135,28 @@
                 android:layout_marginLeft="28dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="10dp"
-                android:text="Serviços"
+                android:text="Itens"
                 android:textAppearance="@style/FontQuickSandBold"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/resourceCard" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/servicesList"
-                android:layout_width="0dp"
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/services" />
+                app:layout_constraintTop_toBottomOf="@+id/services">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/servicesList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.CardView>
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
