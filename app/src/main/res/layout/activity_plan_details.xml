@@ -33,16 +33,16 @@
                 app:layout_collapseMode="parallax" />
 
             <TextView
-                android:background="@drawable/login_edit_text_background"
                 android:id="@+id/planPrice"
-                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|end"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="100dp"
-                android:text="R$ 200.00"
+                android:background="@drawable/login_edit_text_background"
                 android:gravity="center"
+                android:padding="5dp"
+                android:text="R$ 200.00"
 
                 android:textAppearance="@style/FontQuickSand"
                 android:textColor="@color/plain_white"
@@ -55,6 +55,7 @@
                 android:title="Plan 1"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -65,6 +66,80 @@
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Salas"
+                android:textAppearance="@style/FontQuickSandBold"
+                android:textSize="18sp"
+                app:layout_constraintHorizontal_bias="0.059"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pagerRooms"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+            <TextView
+                android:id="@+id/resources"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="12dp"
+                android:text="Recursos"
+                android:textAppearance="@style/FontQuickSandBold"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pagerRooms"
+                android:layout_marginStart="28dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/resourcesList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resources" />
+
+            <TextView
+                android:id="@+id/services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:text="Serviços"
+                android:textAppearance="@style/FontQuickSandBold"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resourcesList"
+                android:layout_marginStart="28dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/servicesList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/services" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
 
