@@ -8,8 +8,8 @@ enum class RoomType {
     shared, private
 }
 
-class RoomPlan(room: Room, quantity_hours: Int)
+class RoomPlan(val room: Room, val quantity_hours: Int)
 
-class Room(name: String, description: String, price_hour: Double, price_month: Double, type: RoomType) {
+class Room(val name: String, val description: String, val price_hour: Double, val price_month: Double, val type: RoomType) {
 
 }

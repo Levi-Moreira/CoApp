@@ -8,9 +8,11 @@ import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.plans.adapters.ItemsListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.ResourcesListAdapter
+import br.edu.ifce.lds.coapp.plans.adapters.RoomsListAdapter
 import br.edu.ifce.lds.coapp.plans.entities.ItemPlan
 import br.edu.ifce.lds.coapp.plans.entities.Plan
 import br.edu.ifce.lds.coapp.plans.entities.ResourcePlan
+import br.edu.ifce.lds.coapp.plans.entities.RoomPlan
 import br.edu.ifce.lds.coapp.plans.presenter.PlanDetailPresenter
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_plan_details.*
@@ -21,9 +23,11 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
 
     lateinit var mResourcesAdapter: ResourcesListAdapter
     lateinit var mItemsAdapter: ItemsListAdapter
+    lateinit var mRoomsAdapter : RoomsListAdapter
 
     var mResources = mutableListOf<ResourcePlan>()
     var mItems = mutableListOf<ItemPlan>()
+    var mRooms = mutableListOf<RoomPlan>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +46,10 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
         servicesList.adapter = mItemsAdapter
         servicesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         servicesList.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+
+
+        mRoomsAdapter = RoomsListAdapter(mRooms)
+        pagerRooms.adapter = mRoomsAdapter
 
         val planId = intent.extras[PLAN_ID]
 
@@ -71,6 +79,10 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
         mItems.clear()
         mItems.addAll(plan.items)
         mItemsAdapter.notifyDataSetChanged()
+
+        mRooms.clear()
+        mRooms.addAll(plan.rooms)
+        mRoomsAdapter.notifyDataSetChanged()
 
 
     }
