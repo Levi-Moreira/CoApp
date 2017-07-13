@@ -3,10 +3,12 @@ package br.edu.ifce.lds.coapp.utils
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import javax.inject.Inject
 
 /**
  * Holds all user  important data in shared preferences
  */
+
 
 class PreferencesUtil
 /**
@@ -14,7 +16,9 @@ class PreferencesUtil
 
  * @param context
  */
+
 (context: Context) {
+
 
 
     private val prefs: SharedPreferences

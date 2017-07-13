@@ -1,17 +1,19 @@
 package br.edu.ifce.lds.coapp.contact.views
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.content.FileProvider
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.text.TextWatcher
 import android.transition.Slide
 import android.view.View.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.R.layout.activity_contact
+import br.edu.ifce.lds.coapp.application.CoAppApplication
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.contact.adapters.AttachmentFilesAdapter
 import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
@@ -33,10 +35,8 @@ import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import kotlinx.android.synthetic.main.activity_contact.*
 import org.jetbrains.anko.*
-import android.R.attr.data
-import android.content.ActivityNotFoundException
-import android.support.v4.content.FileProvider
 import java.io.File
+import javax.inject.Inject
 
 
 class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback, AttachmentFilesAdapter.PickFileCallback {
@@ -64,10 +64,13 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
     val mFilesAdapter = AttachmentFilesAdapter(mFilesList, this)
 
+    @Inject lateinit var mPrefs: PreferencesUtil
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_contact)
+
+        (application as CoAppApplication).appComponent.inject(this)
 
         //check the email option at first
         rbtEmail.isChecked = true
@@ -76,7 +79,7 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         mContactPhoneAdapter = PhoneContactAdapter(mContactPhones, this)
 
         //start up the presenter
-        mPresenter = ContactPresenter(mView = this, prefs = PreferencesUtil(this))
+        mPresenter = ContactPresenter(mView = this, prefs = mPrefs)
 
         //retrieve list of contacts from the backend
         mPresenter.getContactInfo()

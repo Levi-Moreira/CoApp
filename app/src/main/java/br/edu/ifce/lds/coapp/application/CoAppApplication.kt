@@ -4,8 +4,8 @@ package br.edu.ifce.lds.coapp.application
  * Created by ellca on 30/05/2017.
  */
 
-import android.app.Application
 import br.edu.ifce.lds.coapp.R
+import br.edu.ifce.lds.coapp.utils.PreferencesModule
 import org.acra.ReportingInteractionMode
 import org.acra.annotation.ReportsCrashes
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
@@ -18,6 +18,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 @ReportsCrashes(mode = ReportingInteractionMode.TOAST, resToastText = R.string.crash_toast_text, formUri = "") //mailTo = "levi.m.albuquerque@gmail.com",
 
 class CoAppApplication : com.orm.SugarApp() {
+
+    val appComponent: ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
+                .build()
+    }
+
 
     override fun onCreate() {
         super.onCreate()
