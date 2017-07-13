@@ -5,7 +5,6 @@ package br.edu.ifce.lds.coapp.application
  */
 
 import br.edu.ifce.lds.coapp.R
-import br.edu.ifce.lds.coapp.utils.PreferencesModule
 import org.acra.ReportingInteractionMode
 import org.acra.annotation.ReportsCrashes
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig

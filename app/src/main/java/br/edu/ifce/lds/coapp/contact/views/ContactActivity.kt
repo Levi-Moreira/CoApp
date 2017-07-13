@@ -21,7 +21,6 @@ import br.edu.ifce.lds.coapp.contact.adapters.SpinnerCustomAdapter
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
-import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import br.edu.ifce.lds.coapp.utils.afterTextChanged
 import br.edu.ifce.lds.coapp.utils.findByName
 import br.edu.ifce.lds.coapp.utils.listWithNames
@@ -43,7 +42,7 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
 
     //the presenter for this class
-    lateinit var mPresenter: ContactPresenter
+    @Inject lateinit var mPresenter: ContactPresenter
 
     //the list of contact info brought from the backend
     lateinit var mContactInfo: LinkedHashMap<String, ContactInfo>
@@ -64,14 +63,19 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
     val mFilesAdapter = AttachmentFilesAdapter(mFilesList, this)
 
-    @Inject lateinit var mPrefs: PreferencesUtil
+    // @Inject lateinit var mPrefs: PreferencesUtil
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_contact)
 
-        (application as CoAppApplication).appComponent.inject(this)
-
+//        (application as CoAppApplication).appComponent.inject(this)
+//
+        DaggerContactViewComponent
+                .builder()
+                .contactViewModule(ContactViewModule(this))
+                .build()
+                .inject(this)
         //check the email option at first
         rbtEmail.isChecked = true
 
@@ -79,7 +83,7 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         mContactPhoneAdapter = PhoneContactAdapter(mContactPhones, this)
 
         //start up the presenter
-        mPresenter = ContactPresenter(mView = this, prefs = mPrefs)
+        //mPresenter = ContactPresenter(mView = this, prefs = mPrefs)
 
         //retrieve list of contacts from the backend
         mPresenter.getContactInfo()
