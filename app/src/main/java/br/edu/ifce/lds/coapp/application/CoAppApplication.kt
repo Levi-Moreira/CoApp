@@ -4,6 +4,7 @@ package br.edu.ifce.lds.coapp.application
  * Created by ellca on 30/05/2017.
  */
 
+import android.content.Context
 import br.edu.ifce.lds.coapp.R
 import org.acra.ReportingInteractionMode
 import org.acra.annotation.ReportsCrashes
@@ -25,7 +26,8 @@ class CoAppApplication : com.orm.SugarApp() {
     }
 
 
-    override fun onCreate() {
+
+        override fun onCreate() {
         super.onCreate()
 
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()

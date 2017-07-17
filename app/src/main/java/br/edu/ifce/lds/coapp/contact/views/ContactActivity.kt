@@ -13,7 +13,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.R.layout.activity_contact
-import br.edu.ifce.lds.coapp.application.CoAppApplication
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.contact.adapters.AttachmentFilesAdapter
 import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
@@ -71,11 +70,12 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
 //        (application as CoAppApplication).appComponent.inject(this)
 //
-        DaggerContactViewComponent
+        val daggerComponent = DaggerContactViewComponent
                 .builder()
-                .contactViewModule(ContactViewModule(this))
+                .contactViewModule(ContactActivityModule(this))
                 .build()
-                .inject(this)
+
+        daggerComponent.inject(this)
         //check the email option at first
         rbtEmail.isChecked = true
 

@@ -13,8 +13,9 @@ import javax.inject.Singleton
 /**
  * Created by ellca on 06/06/2017.
  */
-@ContactScope
+
 class ContactPresenter @Inject constructor(val mView: ContactView) : BasePresenter<ContactView> {
+
 
     val mDataHandler = ContactDataHandler(this)
 
