@@ -15,4 +15,4 @@ annotation class ContactScope
 @Documented
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Plancope
+annotation class PlanScope

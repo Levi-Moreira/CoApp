@@ -5,7 +5,7 @@ import br.edu.ifce.lds.coapp.plans.dhandler.PlanListDataHandlerImpl
 import br.edu.ifce.lds.coapp.plans.presenter.PlanListPresenter
 import br.edu.ifce.lds.coapp.plans.presenter.PlanListPresenterImpl
 import br.edu.ifce.lds.coapp.plans.views.PlanListView
-import br.edu.ifce.lds.coapp.utils.ContactScope
+import br.edu.ifce.lds.coapp.utils.PlanScope
 import dagger.Module
 import dagger.Provides
 
@@ -15,14 +15,14 @@ import dagger.Provides
 @Module class PlanListActivityModule(val mView: PlanListView) {
 
     @Provides
-    @ContactScope
+    @PlanScope
     fun provideView(): PlanListView = mView
 
     @Provides
-    @ContactScope
+    @PlanScope
     fun providePresenter(mPresenter: PlanListPresenterImpl): PlanListPresenter = mPresenter
 
     @Provides
-    @ContactScope
+    @PlanScope
     fun provideDataHandler(mDataHandler: PlanListDataHandlerImpl): PlanListDataHandler = mDataHandler
 }
