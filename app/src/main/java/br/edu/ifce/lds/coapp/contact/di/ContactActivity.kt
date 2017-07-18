@@ -1,4 +1,4 @@
-package br.edu.ifce.lds.coapp.contact.views
+package br.edu.ifce.lds.coapp.contact.di
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
@@ -21,8 +21,9 @@ import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
 import br.edu.ifce.lds.coapp.contact.adapters.SpinnerCustomAdapter
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
-import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
 import br.edu.ifce.lds.coapp.contact.presenter.IContactPresenter
+import br.edu.ifce.lds.coapp.contact.views.ContactActivityModule
+import br.edu.ifce.lds.coapp.contact.views.ContactView
 import br.edu.ifce.lds.coapp.utils.afterTextChanged
 import br.edu.ifce.lds.coapp.utils.findByName
 import br.edu.ifce.lds.coapp.utils.listWithNames
@@ -43,7 +44,7 @@ import javax.inject.Inject
 class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClickPhoneCallback, AttachmentFilesAdapter.PickFileCallback {
 
 
-    //the presenter for this class
+    //the presenterImpl for this class
     @Inject lateinit var mPresenter: IContactPresenter
 
     //the list of contact info brought from the backend
@@ -71,17 +72,20 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
         super.onCreate(savedInstanceState)
         setContentView(activity_contact)
 
-        val component = CoAppApplication.getApplication(this).appComponent.plus(ContactActivityModule(this))
+        CoAppApplication
+                .getApplication(this)
+                .appComponent
+                .plus(ContactActivityModule(this))
+                .inject(this)
 
-        component.inject(this)
         //check the email option at first
         rbtEmail.isChecked = true
 
         //start up the adapter
         mContactPhoneAdapter = PhoneContactAdapter(mContactPhones, this)
 
-        //start up the presenter
-        //mPresenter = ContactPresenter(mView = this, prefs = mPrefs)
+        //start up the presenterImpl
+        //mPresenterImpl = ContactPresenter(mView = this, prefs = mPrefs)
 
         //retrieve list of contacts from the backend
         mPresenter.getContactInfo()

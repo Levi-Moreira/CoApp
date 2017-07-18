@@ -1,5 +1,6 @@
-package br.edu.ifce.lds.coapp.contact.views
+package br.edu.ifce.lds.coapp.contact.di
 
+import br.edu.ifce.lds.coapp.contact.views.ContactActivityModule
 import br.edu.ifce.lds.coapp.utils.ContactScope
 import dagger.Subcomponent
 
@@ -8,6 +9,6 @@ import dagger.Subcomponent
  */
 @ContactScope
 @Subcomponent(modules = arrayOf(ContactActivityModule::class))
-interface ContactViewComponent {
+interface ContactActivityComponent {
     fun inject(activity: ContactActivity)
 }

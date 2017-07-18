@@ -10,7 +10,7 @@ import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.R.anim.*
 import br.edu.ifce.lds.coapp.R.layout.activity_landing
 import br.edu.ifce.lds.coapp.common.BaseActivity
-import br.edu.ifce.lds.coapp.contact.views.ContactActivity
+import br.edu.ifce.lds.coapp.contact.di.ContactActivity
 import br.edu.ifce.lds.coapp.plans.views.PlanListActivity
 import kotlinx.android.synthetic.main.activity_landing.*
 import org.jetbrains.anko.onClick

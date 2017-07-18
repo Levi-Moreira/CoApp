@@ -32,7 +32,7 @@ class LoginFragment() : Fragment(), LoginView {
     //connects to activity for special requests
     lateinit var mCallback: ILoginFragmentCallbacks
 
-    //presenter for this view
+    //presenterImpl for this view
     lateinit var mPresenter: LoginPresenter
 
 
@@ -61,7 +61,7 @@ class LoginFragment() : Fragment(), LoginView {
     override fun onViewCreated(view: android.view.View?, savedInstanceState: android.os.Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //start up the presenter
+        //start up the presenterImpl
         mPresenter = LoginPresenter(this, this.context)
 
         //configure facebook login button
@@ -124,7 +124,7 @@ class LoginFragment() : Fragment(), LoginView {
     }
 
     /**
-     * Send credentials to presenter for registering in firebase
+     * Send credentials to presenterImpl for registering in firebase
      * @param token the acess token provided by Facebook
      */
     fun handleFacebookAccessToken(token: AccessToken) {

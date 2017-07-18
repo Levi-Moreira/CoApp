@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
  */
 class PlanDetailDataHandler(val presenter: PlanDetailPresenter, val mPrefs: PreferencesUtil) {
 
-    val TAG = "PlanListDataHandler"
+    val TAG = "PlanListDataHandlerImpl"
 
     val backend = CoAppBackend()
 

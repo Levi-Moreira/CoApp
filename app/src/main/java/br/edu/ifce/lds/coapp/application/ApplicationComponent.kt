@@ -2,7 +2,9 @@ package br.edu.ifce.lds.coapp.application
 
 import android.app.Application
 import br.edu.ifce.lds.coapp.contact.views.ContactActivityModule
-import br.edu.ifce.lds.coapp.contact.views.ContactViewComponent
+import br.edu.ifce.lds.coapp.contact.di.ContactActivityComponent
+import br.edu.ifce.lds.coapp.plans.di.PlanListActivityComponent
+import br.edu.ifce.lds.coapp.plans.di.PlanListActivityModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -13,6 +15,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
 
-    fun plus(module: ContactActivityModule): ContactViewComponent
+    fun plus(module: ContactActivityModule): ContactActivityComponent
+    fun plus(module: PlanListActivityModule): PlanListActivityComponent
     fun application(): Application
 }

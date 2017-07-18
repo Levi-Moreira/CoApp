@@ -5,13 +5,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import br.edu.ifce.lds.coapp.R
+import br.edu.ifce.lds.coapp.application.CoAppApplication
 import br.edu.ifce.lds.coapp.common.BaseActivity
+import br.edu.ifce.lds.coapp.contact.views.ContactActivityModule
 import br.edu.ifce.lds.coapp.plans.adapters.PlanListAdapter
+import br.edu.ifce.lds.coapp.plans.di.PlanListActivityModule
 import br.edu.ifce.lds.coapp.plans.entities.Plan
 import br.edu.ifce.lds.coapp.plans.presenter.PlanListPresenter
+import br.edu.ifce.lds.coapp.plans.presenter.PlanListPresenterImpl
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_plan_list.*
 import org.jetbrains.anko.startActivity
+import javax.inject.Inject
 
 val PLAN_ID = "PLAN_ID"
 
@@ -20,6 +25,7 @@ class PlanListActivity : BaseActivity(), PlanListView, PlanListAdapter.OnClickPo
 
     val PLAN_ID = "PLAN_ID"
 
+    @Inject
     lateinit var mPresenter: PlanListPresenter
 
     var mPlanList = mutableListOf<Plan>()
@@ -33,7 +39,12 @@ class PlanListActivity : BaseActivity(), PlanListView, PlanListAdapter.OnClickPo
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        mPresenter = PlanListPresenter(this, PreferencesUtil(this))
+        CoAppApplication
+                .getApplication(this)
+                .appComponent
+                .plus(PlanListActivityModule(this))
+                .inject(this)
+
         mPresenter.getPlans()
     }
 
