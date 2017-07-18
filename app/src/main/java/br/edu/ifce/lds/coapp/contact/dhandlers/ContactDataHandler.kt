@@ -15,7 +15,8 @@ class ContactDataHandler @Inject constructor() : IContactDataHandler {
 
     val TAG = "ContactDataHandler"
 
-    val backend = CoAppBackend()
+    @Inject
+    lateinit var backend: CoAppBackend
 
     override fun getContactInfo(): Observable<Response<ArrayList<ContactInfo>>> = backend.backendAPI.getContacts("1", backend.publicTokenFormatted)
 
