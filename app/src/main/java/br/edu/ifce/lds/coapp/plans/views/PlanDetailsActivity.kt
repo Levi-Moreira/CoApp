@@ -5,20 +5,22 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import br.edu.ifce.lds.coapp.R
+import br.edu.ifce.lds.coapp.application.CoAppApplication
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.plans.adapters.ItemsListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.ResourcesListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.RoomsListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.ServicesListAdapter
+import br.edu.ifce.lds.coapp.plans.di.PlanDetailActivityModule
 import br.edu.ifce.lds.coapp.plans.entities.*
 import br.edu.ifce.lds.coapp.plans.presenter.PlanDetailPresenter
-import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_plan_details.*
 import me.relex.circleindicator.CircleIndicator
+import javax.inject.Inject
 
 class PlanDetailsActivity : BaseActivity(), PlanDetailView {
 
-    lateinit var mPresenter: PlanDetailPresenter
+    @Inject lateinit var mPresenter: PlanDetailPresenter
 
     lateinit var mResourcesAdapter: ResourcesListAdapter
     lateinit var mItemsAdapter: ItemsListAdapter
@@ -37,7 +39,11 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plan_details)
 
-        mPresenter = PlanDetailPresenter(this, PreferencesUtil(this))
+        CoAppApplication
+                .getApplication(this)
+                .appComponent
+                .plus(PlanDetailActivityModule(this))
+                .inject(this)
 
         mResourcesAdapter = ResourcesListAdapter(mResources)
         resourcesList.adapter = mResourcesAdapter
