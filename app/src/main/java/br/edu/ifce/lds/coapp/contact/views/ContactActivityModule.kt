@@ -1,5 +1,7 @@
 package br.edu.ifce.lds.coapp.contact.views
 
+import br.edu.ifce.lds.coapp.contact.dhandlers.ContactDataHandler
+import br.edu.ifce.lds.coapp.contact.dhandlers.IContactDataHandler
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
 import br.edu.ifce.lds.coapp.contact.presenter.IContactPresenter
 import br.edu.ifce.lds.coapp.utils.ContactScope
@@ -18,4 +20,8 @@ import dagger.Provides
     @Provides
     @ContactScope
     fun providePresenter(mPresenter: ContactPresenter): IContactPresenter = mPresenter
+
+    @Provides
+    @ContactScope
+    fun provideDataHandler(mDataHandler: ContactDataHandler): IContactDataHandler = mDataHandler
 }

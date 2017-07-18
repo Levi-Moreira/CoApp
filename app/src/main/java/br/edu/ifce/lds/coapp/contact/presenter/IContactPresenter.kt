@@ -9,7 +9,5 @@ import br.edu.ifce.lds.coapp.contact.views.ContactView
  */
 interface IContactPresenter : BasePresenter<ContactView> {
     fun getContactInfo()
-    fun retrievedInfo(contactInfoList: LinkedHashMap<String, ContactInfo>)
-    fun failedToRetrieve()
-    fun connectionProblem()
+
 }
