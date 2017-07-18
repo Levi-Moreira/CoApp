@@ -7,7 +7,8 @@ import com.orm.SugarRecord
  */
 
 enum class ItemType {
-    consumable
+    consumable,
+    service
 }
 
 class ItemPlan(val item: Item, val quantity: Int) {

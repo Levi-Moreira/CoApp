@@ -9,13 +9,12 @@ import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.plans.adapters.ItemsListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.ResourcesListAdapter
 import br.edu.ifce.lds.coapp.plans.adapters.RoomsListAdapter
-import br.edu.ifce.lds.coapp.plans.entities.ItemPlan
-import br.edu.ifce.lds.coapp.plans.entities.Plan
-import br.edu.ifce.lds.coapp.plans.entities.ResourcePlan
-import br.edu.ifce.lds.coapp.plans.entities.RoomPlan
+import br.edu.ifce.lds.coapp.plans.adapters.ServicesListAdapter
+import br.edu.ifce.lds.coapp.plans.entities.*
 import br.edu.ifce.lds.coapp.plans.presenter.PlanDetailPresenter
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_plan_details.*
+import me.relex.circleindicator.CircleIndicator
 
 class PlanDetailsActivity : BaseActivity(), PlanDetailView {
 
@@ -23,11 +22,15 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
 
     lateinit var mResourcesAdapter: ResourcesListAdapter
     lateinit var mItemsAdapter: ItemsListAdapter
-    lateinit var mRoomsAdapter : RoomsListAdapter
+    lateinit var mRoomsAdapter: RoomsListAdapter
+    lateinit var mServicesAdapter: ServicesListAdapter
 
     var mResources = mutableListOf<ResourcePlan>()
     var mItems = mutableListOf<ItemPlan>()
+    var mServices = mutableListOf<ItemPlan>()
     var mRooms = mutableListOf<RoomPlan>()
+
+    lateinit var circleIndicator: CircleIndicator
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,17 +42,23 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
         mResourcesAdapter = ResourcesListAdapter(mResources)
         resourcesList.adapter = mResourcesAdapter
         resourcesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        resourcesList.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+        resourcesList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
 
         mItemsAdapter = ItemsListAdapter(mItems)
-        servicesList.adapter = mItemsAdapter
-        servicesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        servicesList.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+        itemsList.adapter = mItemsAdapter
+        itemsList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        itemsList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
+        mServicesAdapter = ServicesListAdapter(mServices)
+        servicesList.adapter = mServicesAdapter
+        servicesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        servicesList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
         mRoomsAdapter = RoomsListAdapter(mRooms)
         pagerRooms.adapter = mRoomsAdapter
+        indicator.setViewPager(pagerRooms)
+        mRoomsAdapter.registerDataSetObserver(indicator.dataSetObserver)
 
         val planId = intent.extras[PLAN_ID]
 
@@ -74,17 +83,60 @@ class PlanDetailsActivity : BaseActivity(), PlanDetailView {
 
         mResources.clear()
         mResources.addAll(plan.resources)
-        mResourcesAdapter.notifyDataSetChanged()
 
-        mItems.clear()
-        mItems.addAll(plan.items)
-        mItemsAdapter.notifyDataSetChanged()
+        if (mResources.size > 0) {
+
+            mResourcesAdapter.notifyDataSetChanged()
+        } else
+            hideResources()
+
 
         mRooms.clear()
         mRooms.addAll(plan.rooms)
-        mRoomsAdapter.notifyDataSetChanged()
+
+        if (mRooms.size > 0)
+            mRoomsAdapter.notifyDataSetChanged()
+        else
+            hideRooms()
 
 
+        mItems.clear()
+        mItems.addAll(plan.items.filter { it.item.type == ItemType.consumable })
+
+        if (mItems.size > 0)
+            mItemsAdapter.notifyDataSetChanged()
+        else
+            hideItems()
+
+        mServices.clear()
+        mServices.addAll(plan.items.filter { it.item.type == ItemType.service })
+
+        if (mServices.size > 0)
+            mServicesAdapter.notifyDataSetChanged()
+        else
+            hideServices()
+
+
+    }
+
+    private fun hideRooms() {
+        rooms.visibility = View.GONE
+        pagerRooms.visibility = View.GONE
+    }
+
+    private fun hideServices() {
+        services.visibility = View.GONE
+        servicesCard.visibility = View.GONE
+    }
+
+    private fun hideItems() {
+        items.visibility = View.GONE
+        itemsCard.visibility = View.GONE
+    }
+
+    private fun hideResources() {
+        resourcesT.visibility = View.GONE
+        resourceCard.visibility = View.GONE
     }
 
     override fun connectionError() {
