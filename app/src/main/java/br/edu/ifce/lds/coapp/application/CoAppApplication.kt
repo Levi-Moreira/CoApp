@@ -18,6 +18,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 @ReportsCrashes(mode = ReportingInteractionMode.TOAST, resToastText = R.string.crash_toast_text, formUri = "") //mailTo = "levi.m.albuquerque@gmail.com",
 class CoAppApplication : com.orm.SugarApp() {
 
+    //start up the dagger for the application
     val appComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
@@ -28,6 +29,7 @@ class CoAppApplication : com.orm.SugarApp() {
     override fun onCreate() {
         super.onCreate()
 
+        //apply custom font to the whole app
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
                 .setDefaultFontPath("font/DroidSans.ttf")
                 .setFontAttrId(R.attr.fontPath)

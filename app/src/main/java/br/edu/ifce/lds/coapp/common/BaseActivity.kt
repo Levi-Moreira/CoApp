@@ -8,6 +8,9 @@ import kotlinx.android.synthetic.main.activity_landing.*
 import org.jetbrains.anko.onClick
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
+/**
+ * Just for applying the custom font to all activities
+ */
 open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
