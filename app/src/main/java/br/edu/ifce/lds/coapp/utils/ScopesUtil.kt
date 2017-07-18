@@ -9,5 +9,5 @@ import javax.inject.Scope
  */
 @Documented
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class ContactScope

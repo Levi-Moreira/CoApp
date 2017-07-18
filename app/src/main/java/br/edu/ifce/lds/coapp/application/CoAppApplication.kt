@@ -16,7 +16,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig
  * In this project we use TraceBot to keep track of crashes in the application
  */
 @ReportsCrashes(mode = ReportingInteractionMode.TOAST, resToastText = R.string.crash_toast_text, formUri = "") //mailTo = "levi.m.albuquerque@gmail.com",
-
 class CoAppApplication : com.orm.SugarApp() {
 
     val appComponent: ApplicationComponent by lazy {
@@ -26,8 +25,7 @@ class CoAppApplication : com.orm.SugarApp() {
     }
 
 
-
-        override fun onCreate() {
+    override fun onCreate() {
         super.onCreate()
 
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
@@ -36,4 +34,9 @@ class CoAppApplication : com.orm.SugarApp() {
                 .build()
         )
     }
+
+    companion object get {
+        fun getApplication(context: Context): CoAppApplication = context.applicationContext as CoAppApplication
+    }
 }
+

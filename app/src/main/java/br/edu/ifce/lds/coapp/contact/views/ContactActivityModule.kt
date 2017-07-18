@@ -1,6 +1,7 @@
 package br.edu.ifce.lds.coapp.contact.views
 
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
+import br.edu.ifce.lds.coapp.contact.presenter.IContactPresenter
 import br.edu.ifce.lds.coapp.utils.ContactScope
 import dagger.Module
 import dagger.Provides
@@ -16,5 +17,5 @@ import dagger.Provides
 
     @Provides
     @ContactScope
-    fun providePresenter(mPresenter: ContactPresenter): ContactPresenter = mPresenter
+    fun providePresenter(mPresenter: ContactPresenter): IContactPresenter = mPresenter
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.support.v4.content.FileProvider
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.R.layout.activity_contact
+import br.edu.ifce.lds.coapp.application.CoAppApplication
 import br.edu.ifce.lds.coapp.common.BaseActivity
 import br.edu.ifce.lds.coapp.contact.adapters.AttachmentFilesAdapter
 import br.edu.ifce.lds.coapp.contact.adapters.PhoneContactAdapter
@@ -20,6 +22,7 @@ import br.edu.ifce.lds.coapp.contact.adapters.SpinnerCustomAdapter
 import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
 import br.edu.ifce.lds.coapp.contact.entities.ContactType
 import br.edu.ifce.lds.coapp.contact.presenter.ContactPresenter
+import br.edu.ifce.lds.coapp.contact.presenter.IContactPresenter
 import br.edu.ifce.lds.coapp.utils.afterTextChanged
 import br.edu.ifce.lds.coapp.utils.findByName
 import br.edu.ifce.lds.coapp.utils.listWithNames
@@ -41,7 +44,7 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
 
     //the presenter for this class
-    @Inject lateinit var mPresenter: ContactPresenter
+    @Inject lateinit var mPresenter: IContactPresenter
 
     //the list of contact info brought from the backend
     lateinit var mContactInfo: LinkedHashMap<String, ContactInfo>
@@ -64,18 +67,13 @@ class ContactActivity : BaseActivity(), ContactView, PhoneContactAdapter.OnClick
 
     // @Inject lateinit var mPrefs: PreferencesUtil
 
-    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_contact)
 
-//        (application as CoAppApplication).appComponent.inject(this)
-//
-        val daggerComponent = DaggerContactViewComponent
-                .builder()
-                .contactViewModule(ContactActivityModule(this))
-                .build()
+        val component = CoAppApplication.getApplication(this).appComponent.plus(ContactActivityModule(this))
 
-        daggerComponent.inject(this)
+        component.inject(this)
         //check the email option at first
         rbtEmail.isChecked = true
 

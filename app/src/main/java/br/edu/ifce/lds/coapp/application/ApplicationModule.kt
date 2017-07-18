@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
     @Provides @Singleton fun providesContext(): Context = app
 
-    @Provides @Singleton fun providesApplication(): Context = app
+    @Provides @Singleton fun providesApplication(): Application = app
 
     @Provides @Singleton fun providesPreferences(): PreferencesUtil = PreferencesUtil(app)
 
