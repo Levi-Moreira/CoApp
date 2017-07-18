@@ -4,7 +4,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
@@ -14,14 +14,15 @@
 
         <ImageView
             android:id="@+id/planImage"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/office_space"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,20 +31,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginStart="20dp"
             android:padding="5dp"
             android:text="Uma pequena descricao do plano"
             android:textAppearance="@style/FontQuickSand"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/planName" />
+            app:layout_constraintTop_toBottomOf="@+id/planName"
+            tools:layout_editor_absoluteX="10dp" />
 
         <TextView
             android:id="@+id/planPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/main_menu_item_background"
             android:padding="5dp"
@@ -52,19 +52,20 @@
             android:textColor="@color/plain_white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="298dp" />
 
         <TextView
             android:id="@+id/planName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:padding="5dp"
             android:text="Nome de Plano"
             android:textAppearance="@style/FontQuickSandBold"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/planImage" />
+            app:layout_constraintTop_toBottomOf="@+id/planImage"
+            tools:layout_editor_absoluteX="10dp" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -40,7 +40,7 @@
                 android:layout_gravity="top|end"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="100dp"
-                android:background="@color/menu_back_item_color_pressed"
+                android:background="@drawable/main_menu_item_background"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="R$ 200.00"
@@ -76,8 +76,8 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Salas"
@@ -92,6 +92,7 @@
                 android:id="@+id/pagerRooms"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -174,12 +175,12 @@
         app:pressedTranslationZ="12dp" />
 
     <FrameLayout
-        android:elevation="7dp"
         android:id="@+id/progressWheel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:background="@color/plain_white"
+        android:elevation="7dp"
         android:visibility="gone"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
