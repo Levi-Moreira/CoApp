@@ -2,10 +2,10 @@
     <string name="app_name">CoApp</string>
     <string name="title_activity_landing">LandingActivity</string>
     <string name="crash_toast_text">Ocorreu um erro e o app precisou ser fechado.</string>
-    <string name="meet_ou_plans">Conheça nossos planos</string>
+    <string name="meet_ou_plans">Conheça nossos \nplanos</string>
     <string name="contact_us">Fale Conosco</string>
-    <string name="sign_up">Faça seu cadastro</string>
-    <string name="emergency_sheducling">Agenda Emergencial</string>
+    <string name="sign_up">Faça seu \ncadastro</string>
+    <string name="emergency_sheducling">Agenda \nEmergencial</string>
     <string name="sign_in">Entrar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -13,7 +13,7 @@
     <string name="go_back">Voltar</string>
     <string name="password">Senha</string>
     <string name="email">Email</string>
-    <string name="facebook_sign_in">Entrar com Facebook</string>
+    <string name="facebook_sign_in">Entrar com \nFacebook</string>
     <string name="login_sucessful">Entrando...</string>
     <string name="auth_failed">Email ou senha inválidos</string>
     <string name="connection_failed">Ocorreu um erro de conexão.</string>
@@ -34,6 +34,7 @@
     <string name="plans">Planos</string>
     <string name="our_plans">Nossos Planos</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed lectus a metus porta tempus. Duis sem risus, ultrices quis mauris ut, hendrerit tincidunt sapien. In vitae venenatis augue. Aliquam tempor sem at dolor feugiat sollicitudin. Morbi quis ipsum id massa luctus pharetra. Fusce eget est tempus, consectetur dolor dictum, dapibus ante. Nam rhoncus, dui nec cursus dictum, nunc justo mollis nisl, accumsan porta magna urna in justo. Cras molestie eleifend risus, non consectetur lacus viverra at.  Donec et lacus et lorem cursus lacinia id sed eros. Morbi sit amet posuere nulla. Suspendisse posuere euismod magna a commodo. Ut ut tempus dolor, ac rhoncus nibh. Aenean facilisis lobortis tincidunt. Nullam blandit tristique sem, eu convallis metus. Aliquam sollicitudin lectus non ante pharetra varius. Curabitur vulputate, felis vitae blandit vehicula, eros purus sollicitudin lorem, ut gravida erat massa id metus. Aliquam eleifend, magna sit amet consequat egestas, diam dolor malesuada leo, et condimentum urna enim et leo. Quisque vel rutrum dolor. Vestibulum consequat, lacus vel dictum volutpat, nunc eros pharetra orci, id bibendum lectus orci sit amet nibh. Aliquam faucibus, purus quis bibendum pulvinar, odio quam fringilla metus, sed euismod purus tortor et lacus. Vestibulum eu est tempor, iaculis mauris nec, volutpat enim. Morbi eget eros mi. Donec congue massa vel justo facilisis congue.</string>
+    <string name="cohabitat">Cohabitat</string>
 
 
 </resources>

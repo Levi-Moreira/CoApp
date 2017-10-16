@@ -8,6 +8,7 @@ import android.util.Log
 import br.edu.ifce.lds.coapp.R
 import br.edu.ifce.lds.coapp.application.UserSession
 import br.edu.ifce.lds.coapp.landing.views.LandingActivity
+import br.edu.ifce.lds.coapp.login.LoginActivity
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivity
@@ -30,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
 
         discoveryKeyHarsh()
         signInFirebaseAnonimous()
-        startActivity<LandingActivity>()
+        startActivity<LoginActivity>()
     }
 
     /**
