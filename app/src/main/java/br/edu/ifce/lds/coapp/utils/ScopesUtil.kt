@@ -16,3 +16,8 @@ annotation class ContactScope
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class PlanScope
+
+@Documented
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class LoginScope

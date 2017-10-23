@@ -7,7 +7,7 @@ import br.edu.ifce.lds.coapp.contact.entities.ContactInfo
  * Created by ellca on 06/06/2017.
  */
 
-open interface ContactView : BaseView {
+interface ContactView : BaseView {
     fun retrievedContactInfo(contactsInfo: LinkedHashMap<String, ContactInfo>)
 
     fun onError(message: String?)

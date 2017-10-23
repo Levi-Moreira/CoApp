@@ -58,7 +58,7 @@
             android:name=".plans.views.PlanDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.views.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

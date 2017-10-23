@@ -1,7 +1,7 @@
 package br.edu.ifce.lds.coapp.application
 
 
-import br.edu.ifce.lds.coapp.landing.entities.User
+import br.edu.ifce.lds.coapp.login.entities.User
 import br.edu.ifce.lds.coapp.utils.PreferencesUtil
 
 
@@ -17,11 +17,11 @@ class UserSession(private val mPrefs: PreferencesUtil) {
      * @param user The logged user
      */
     fun signin(user: User) {
-        mPrefs.setString(PreferencesUtil.UID, user.uid)
-        mPrefs.setString(PreferencesUtil.LOGGED, "true")
-        mPrefs.setString(PreferencesUtil.USERNAME, user.name)
-        mPrefs.setString(PreferencesUtil.EMAIL, user.email)
-        mPrefs.setString(PreferencesUtil.PASSWORD, user.password)
+//        mPrefs.setString(PreferencesUtil.UID, user.uid)
+//        mPrefs.setString(PreferencesUtil.LOGGED, "true")
+//        mPrefs.setString(PreferencesUtil.USERNAME, user.name)
+//        mPrefs.setString(PreferencesUtil.EMAIL, user.email)
+//        mPrefs.setString(PreferencesUtil.PASSWORD, user.password)
 
 
     }

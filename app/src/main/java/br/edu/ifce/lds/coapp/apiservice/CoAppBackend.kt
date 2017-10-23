@@ -11,10 +11,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CoAppBackend() {
     //base URL where the server lives
-    val SERVER_BASE_URL = "http://coapplds.herokuapp.com"
+    val SERVER_BASE_URL = "http://cohabitat.com.br/api/v1/"
 
     //master token
-    private val API_PUBLIC_TOKEN = "48a85596e6bb44db8851c26be21045687faa813a"
+    private val API_PUBLIC_TOKEN = "3795120644e36ad156daac35a989db2dad78e154"
 
     var backendAPI: BackendAPI
 
